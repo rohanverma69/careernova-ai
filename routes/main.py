@@ -9,6 +9,8 @@ main_bp = Blueprint("main", __name__)
 
 
 @main_bp.route("/")
+@main_bp.route("/api/index")
+@main_bp.route("/api/index/")
 def index():
     """High-converting animated landing page."""
     featured_careers = get_all_careers()[:6]
