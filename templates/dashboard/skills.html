@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Skill Progress Tracker — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;" class="reveal">
+    <div>
+      <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        <a href="{{ url_for('dashboard.overview') }}" style="color: var(--text-secondary); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 0.5rem;">/</span>
+        <span style="color: var(--accent-cyan);">Skill Tracker</span>
+      </div>
+      <h1>Interactive Skill Acquisition Board</h1>
+      <p>Organize and track your technical milestones from initial learning to interview mastery.</p>
+    </div>
+
+    <!-- Quick Skill Add Box -->
+    <div style="display: flex; gap: 0.5rem;">
+      <input type="text" id="new-skill-input" class="form-input" style="padding: 0.5rem 0.9rem; font-size: 0.88rem; width: 220px;" placeholder="Add skill (e.g. PyTorch)...">
+      <button type="button" class="btn btn-primary btn-sm" onclick="quickAddSkill()">+ Add</button>
+    </div>
+  </div>
+
+  <!-- 3-Column Kanban Board -->
+  <div class="kanban-board reveal">
+    <!-- Column 1: To Learn -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-purple);"></span>
+          <h4 style="font-size: 1.05rem;">To Learn</h4>
+        </div>
+        <span class="badge badge-purple">{{ to_learn|length }}</span>
+      </div>
+
+      <div class="kanban-items-list" id="col-to_learn">
+        {% for s in to_learn %}
+          <div class="kanban-item">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem;">
+              <strong style="color: var(--text-white); font-size: 0.95rem;">{{ s.skill_name }}</strong>
+              <button class="alert-close" style="font-size: 0.9rem;" onclick="deleteSkill('{{ s.skill_name }}', this)" title="Remove skill">&times;</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Status: Queued</span>
+              <button class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="updateSkillStatus('{{ s.skill_name }}', 'in_progress', this)">
+                Start Learning →
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <p class="text-muted" style="text-align: center; padding: 2rem 1rem; font-size: 0.85rem;">
+            No skills queued. Add new skills or retake the assessment to automatically import priority gaps.
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Column 2: In Progress -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-cyan);"></span>
+          <h4 style="font-size: 1.05rem;">In Progress</h4>
+        </div>
+        <span class="badge badge-cyan">{{ in_progress|length }}</span>
+      </div>
+
+      <div class="kanban-items-list" id="col-in_progress">
+        {% for s in in_progress %}
+          <div class="kanban-item" style="border-color: rgba(6, 182, 212, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem;">
+              <strong style="color: var(--text-white); font-size: 0.95rem;">{{ s.skill_name }}</strong>
+              <button class="alert-close" style="font-size: 0.9rem;" onclick="deleteSkill('{{ s.skill_name }}', this)" title="Remove skill">&times;</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+              <button class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="updateSkillStatus('{{ s.skill_name }}', 'to_learn', this)">
+                ← Queue
+              </button>
+              <button class="btn btn-primary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="updateSkillStatus('{{ s.skill_name }}', 'completed', this)">
+                Mark Mastered ✓
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <p class="text-muted" style="text-align: center; padding: 2rem 1rem; font-size: 0.85rem;">
+            No skills currently in progress.
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Column 3: Completed / Mastered -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-emerald);"></span>
+          <h4 style="font-size: 1.05rem;">Mastered</h4>
+        </div>
+        <span class="badge badge-emerald">{{ completed|length }}</span>
+      </div>
+
+      <div class="kanban-items-list" id="col-completed">
+        {% for s in completed %}
+          <div class="kanban-item" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem;">
+              <strong style="color: #6ee7b7; font-size: 0.95rem;">✓ {{ s.skill_name }}</strong>
+              <button class="alert-close" style="font-size: 0.9rem;" onclick="deleteSkill('{{ s.skill_name }}', this)" title="Remove skill">&times;</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: #34d399;">Interview Ready</span>
+              <button class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="updateSkillStatus('{{ s.skill_name }}', 'in_progress', this)">
+                ↺ Revisit
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <p class="text-muted" style="text-align: center; padding: 2rem 1rem; font-size: 0.85rem;">
+            No skills marked mastered yet. Keep learning!
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  async function quickAddSkill() {
+    const input = document.getElementById('new-skill-input');
+    const skillName = input.value.trim();
+    if (!skillName) return;
+
+    await updateSkillStatus(skillName, 'to_learn');
+    input.value = '';
+  }
+</script>
+{% endblock %}

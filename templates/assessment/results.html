@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Results: {{ results.top_career.title }} ({{ results.top_career.match_percentage }}% Match) — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+
+  <!-- Guest Alert Banner if not saved to account -->
+  {% if is_guest %}
+    <div class="glass-card reveal" style="background: rgba(139, 92, 246, 0.12); border-color: var(--border-glow); margin-bottom: 2rem; padding: 1.25rem 1.75rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h4 style="font-size: 1rem; color: var(--text-white); margin-bottom: 0.2rem;">⚡ Temporary Guest Session</h4>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0;">
+          Create a free account to permanently save this assessment, unlock the interactive skill progress tracker, and receive updated roadmaps.
+        </p>
+      </div>
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Save to Free Account</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-secondary btn-sm">Sign In</a>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Top Recommended Career Hero Banner -->
+  <div class="results-header-banner reveal">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+      <div style="max-width: 720px;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+          <span class="badge badge-purple">#1 Recommended Match</span>
+          <span class="badge badge-cyan">{{ results.top_career.category }}</span>
+        </div>
+
+        <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 0.75rem;">
+          {{ results.top_career.title }}
+        </h1>
+
+        <p style="font-size: 1.1rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 1.5rem;">
+          {{ results.top_career.tagline }}
+        </p>
+
+        <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+          <div>
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Median Compensation</span>
+            <p style="font-size: 1.5rem; font-weight: 800; color: var(--accent-emerald);">{{ results.top_career.salary_range.median }} <span style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted);">/ year</span></p>
+          </div>
+          <div style="border-left: 1px solid var(--border-subtle); padding-left: 2rem;">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Industry Growth</span>
+            <p style="font-size: 1.25rem; font-weight: 700; color: var(--text-white);">{{ results.top_career.growth_rate }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match Score Circular Gauge -->
+      <div style="text-align: center;">
+        <div class="match-score-badge" data-target-score="{{ results.top_career.match_percentage }}">
+          {{ results.top_career.match_percentage }}%
+        </div>
+        <span style="display: block; margin-top: 0.6rem; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-cyan);">
+          Match Alignment
+        </span>
+
+        {% if current_user.is_authenticated %}
+          <button class="btn btn-secondary btn-sm" style="margin-top: 1rem;" onclick="toggleSaveCareer('{{ results.top_career.key }}', this)">
+            ☆ Save Career Path
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Score Breakdown & Skill-Gap Analysis -->
+  <div class="score-breakdown-grid">
+    <!-- Left Column: Radar Chart & Alignment Explanation -->
+    <div class="glass-card reveal">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h4>Technical Dimension Readiness</h4>
+        <span class="badge badge-cyan">Overall Index: {{ results.overall_readiness_score }}/100</span>
+      </div>
+
+      <!-- Radar Chart Canvas -->
+      <div class="radar-container">
+        <canvas id="radar-chart"></canvas>
+      </div>
+
+      <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+        <h5 style="font-size: 0.95rem; color: var(--text-white); margin-bottom: 0.5rem;">Why This Career Fits You:</h5>
+        <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-secondary);">
+          {{ results.top_career.explanation }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Skills Matched vs Priority Gaps -->
+    <div class="glass-card reveal">
+      <h4 style="margin-bottom: 1.25rem;">Skill-Gap Diagnostics</h4>
+
+      <div style="margin-bottom: 1.75rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: #34d399;">
+            ✓ Matched Competencies ({{ results.top_career.matched_core_skills|length + results.top_career.matched_secondary_skills|length }})
+          </span>
+          <span class="badge badge-emerald">Ready</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {% for skill in results.top_career.matched_core_skills %}
+            <span class="skill-tag skill-tag-matched">{{ skill }}</span>
+          {% endfor %}
+          {% for skill in results.top_career.matched_secondary_skills %}
+            <span class="skill-tag skill-tag-matched">{{ skill }}</span>
+          {% endfor %}
+          {% if not results.top_career.matched_core_skills and not results.top_career.matched_secondary_skills %}
+            <p class="text-muted" style="font-size: 0.85rem;">No exact skill overlap detected yet. Follow Phase 1 below.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-purple-light);">
+            ⚡ Priority Skills to Acquire ({{ results.top_career.missing_core_skills|length }})
+          </span>
+          <span class="badge badge-purple">High Leverage</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {% for skill in results.top_career.missing_core_skills %}
+            <span class="skill-tag skill-tag-gap">{{ skill }}</span>
+          {% endfor %}
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.8rem;">
+          *Acquiring these top priority skills will increase your match score to ~96% and unlock senior interview pipelines.
+        </p>
+      </div>
+
+      <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-white); display: block; margin-bottom: 0.5rem;">
+          Target Job Titles:
+        </span>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {% for role in results.top_career.roles %}
+            <span class="badge badge-cyan" style="font-size: 0.78rem;">{{ role }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Executive Advisor Callout -->
+  {% if results.ai_advisor %}
+    <div class="ai-advisor-box reveal">
+      <div class="ai-advisor-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="ai-pill">AI Guidance</span>
+          <h3 style="font-size: 1.25rem; margin: 0;">Personalized 90-Day Executive Strategy</h3>
+        </div>
+        <span style="font-size: 0.8rem; color: var(--accent-cyan);">
+          Powered by {{ results.ai_advisor.provider }}
+        </span>
+      </div>
+
+      <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.5rem;">
+        {{ results.ai_advisor.narrative }}
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+        {% for plan in results.ai_advisor.action_plan %}
+          <div style="background: rgba(10, 16, 33, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+            <span class="badge badge-purple" style="margin-bottom: 0.5rem;">{{ plan.days }}</span>
+            <h5 style="color: var(--text-white); margin-bottom: 0.4rem; font-size: 1rem;">{{ plan.focus }}</h5>
+            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary); margin: 0;">{{ plan.details }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+        <div>
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-amber); font-weight: 700;">Interview Edge Strategy:</span>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem;">
+            {{ results.ai_advisor.interview_tip }}
+          </p>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700;">Hiring Market Pulse:</span>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem;">
+            {{ results.ai_advisor.market_insight }}
+          </p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- 4-Phase Learning Roadmap -->
+  <div class="glass-card reveal" style="margin-bottom: 3rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+      <div>
+        <span class="badge badge-cyan" style="margin-bottom: 0.5rem;">Actionable Blueprint</span>
+        <h3>4-Stage Learning Roadmap</h3>
+        <p class="text-muted">Structured progression from fundamentals to enterprise portfolio proof.</p>
+      </div>
+      <a href="{{ url_for('main.career_detail', career_key=results.top_career.key) }}" class="btn btn-secondary btn-sm">
+        View Complete Curriculum →
+      </a>
+    </div>
+
+    <div class="roadmap-timeline">
+      {% for phase in results.top_career.roadmap %}
+        <div class="timeline-phase">
+          <div class="timeline-node">{{ loop.index }}</div>
+          <div class="phase-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 1.1rem; color: var(--text-white);">{{ phase.phase }}</h4>
+              <span class="badge badge-purple">{{ phase.timeframe }}</span>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Key Skills Covered:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem;">
+                {% for skill in phase.skills %}
+                  <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--accent-cyan); padding: 0.65rem 0.9rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan);">Portfolio Milestone: </span>
+              <span style="font-size: 0.88rem; color: var(--text-secondary);">{{ phase.project }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Alternative Top Career Matches -->
+  <div style="margin-bottom: 3rem;" class="reveal">
+    <h3 style="margin-bottom: 1.5rem;">Alternative Strong Alignments</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+      {% for rec in results.recommendations[1:4] %}
+        <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <span class="badge badge-cyan">{{ rec.category }}</span>
+              <span class="badge badge-purple">{{ rec.match_percentage }}% Match</span>
+            </div>
+            <h4 style="margin-bottom: 0.4rem;">{{ rec.title }}</h4>
+            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">{{ rec.tagline }}</p>
+
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Median: <strong class="text-white">{{ rec.salary_range.median }}</strong>
+            </div>
+          </div>
+
+          <a href="{{ url_for('main.career_detail', career_key=rec.key) }}" class="btn btn-secondary btn-sm btn-block">
+            View Career Details →
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Curated Learning Resources Grid -->
+  <div class="glass-card reveal">
+    <div style="margin-bottom: 1.5rem;">
+      <span class="badge badge-emerald" style="margin-bottom: 0.5rem;">Free & Verified</span>
+      <h3>Top Recommended Learning Resources</h3>
+      <p class="text-muted">High-yield interactive courses, documentation, and tutorials to accelerate your roadmap.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+      {% for res in results.top_career.resources %}
+        <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="badge badge-cyan">{{ res.type }}</span>
+              {% if res.free %}
+                <span class="badge badge-emerald">Free</span>
+              {% else %}
+                <span class="badge badge-amber">Paid / Cert</span>
+              {% endif %}
+            </div>
+            <h5 style="color: var(--text-white); font-size: 0.98rem; margin-bottom: 0.5rem;">{{ res.title }}</h5>
+          </div>
+          <a href="{{ res.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan btn-sm" style="margin-top: 1rem;">
+            Access Resource ↗
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem;">
+    <a href="{{ url_for('assessment.wizard') }}" class="btn btn-secondary">
+      ↺ Retake Assessment with Different Skills
+    </a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize radar chart with dynamic server scores
+    const dimensions = {{ results.radar_dimensions | tojson }};
+    new SkillRadarChart('radar-chart', dimensions);
+  });
+</script>
+{% endblock %}

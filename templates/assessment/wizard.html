@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Career Assessment Wizard — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container wizard-container">
+  <div style="text-align: center; margin-bottom: 2rem;" class="reveal">
+    <span class="badge badge-purple" style="margin-bottom: 0.6rem;">Precision Calibration</span>
+    <h2>Career Alignment Assessment</h2>
+    <p>Complete this 4-step diagnostic to calculate your technical compatibility across 18+ high-demand tech careers.</p>
+  </div>
+
+  <!-- Progress Tracker -->
+  <div class="wizard-progress-header reveal">
+    <div class="wizard-steps-nav">
+      <div class="wizard-step-node active" id="step-node-1">
+        <div class="step-circle">1</div>
+        <span class="step-label">Background</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-2">
+        <div class="step-circle">2</div>
+        <span class="step-label">Skills</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-3">
+        <div class="step-circle">3</div>
+        <span class="step-label">Interests</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-4">
+        <div class="step-circle">4</div>
+        <span class="step-label">Goals & Review</span>
+      </div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="wizard-progress-fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <!-- Assessment Form -->
+  <div class="glass-card reveal" style="padding: 2.5rem;">
+    <form method="POST" action="{{ url_for('assessment.wizard') }}" id="assessment-wizard-form">
+      {{ form.hidden_tag() }}
+      <input type="hidden" name="custom_skills" id="custom-skills-input" value="">
+      <input type="hidden" name="custom_interests" id="custom-interests-input" value="">
+
+      <!-- STEP 1: Background & Work Style -->
+      <div class="wizard-pane active" id="step-pane-1">
+        <div style="margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 1: Experience & Work Preferences</h3>
+          <p class="text-muted">Tell us about your current academic standing and ideal workplace dynamics.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="education_level">{{ form.education_level.label.text }}</label>
+          {{ form.education_level(class="form-select") }}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="experience_years">{{ form.experience_years.label.text }}</label>
+          {{ form.experience_years(class="form-select") }}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="work_style">{{ form.work_style.label.text }}</label>
+          {{ form.work_style(class="form-select") }}
+        </div>
+      </div>
+
+      <!-- STEP 2: Technical Skills -->
+      <div class="wizard-pane" id="step-pane-2">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 2: Technical & Core Skills</h3>
+          <p class="text-muted">Select all skills you have used or are currently learning. Select at least 1 skill.</p>
+        </div>
+
+        <!-- Live Skill Filter -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <input type="text" id="skill-search-input" class="form-input" placeholder="🔍 Search skills (e.g. Python, Docker, React, SQL)...">
+        </div>
+
+        <!-- Predefined Skills Checkboxes -->
+        <div class="checkbox-chips-grid" id="skills-grid">
+          {% for subfield in form.skills %}
+            <label class="chip-checkbox-label">
+              {{ subfield() }}
+              <span>{{ subfield.label.text }}</span>
+            </label>
+          {% endfor %}
+        </div>
+
+        <!-- Custom Skill Adder -->
+        <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+          <label class="form-label" style="margin-bottom: 0.4rem;">Don't see a specific skill? Add it here:</label>
+          <div style="display: flex; gap: 0.75rem;">
+            <input type="text" id="custom-skill-text" class="form-input" placeholder="e.g. FastAPI, GraphQL, OpenCV, Rust">
+            <button type="button" id="btn-add-custom-skill" class="btn btn-secondary btn-sm">+ Add</button>
+          </div>
+          <div id="custom-skills-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;"></div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Passions & Domain Interests -->
+      <div class="wizard-pane" id="step-pane-3">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 3: What Energizes You?</h3>
+          <p class="text-muted">Select the technology domains and problem spaces you find most exciting.</p>
+        </div>
+
+        <div class="checkbox-chips-grid">
+          {% for subfield in form.interests %}
+            <label class="chip-checkbox-label">
+              {{ subfield() }}
+              <span>{{ subfield.label.text }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- STEP 4: Goals & Review -->
+      <div class="wizard-pane" id="step-pane-4">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 4: Career Vision & Submission</h3>
+          <p class="text-muted">Optional: share your specific career goals to enrich your personalized AI action plan.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="career_goals">{{ form.career_goals.label.text }}</label>
+          {{ form.career_goals(class="form-textarea") }}
+        </div>
+
+        <!-- Review Summary Box -->
+        <div style="background: rgba(10, 16, 33, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
+          <h4 style="font-size: 1rem; color: var(--accent-cyan); margin-bottom: 1rem;">Profile Review Summary:</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+            <div>
+              <span class="text-muted">Education:</span>
+              <p class="text-white" id="review-education">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Experience Level:</span>
+              <p class="text-white" id="review-experience">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Skills Selected:</span>
+              <p class="text-white" id="review-skills-count">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Interests Selected:</span>
+              <p class="text-white" id="review-interests-count">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation & Action Buttons -->
+      <div class="wizard-actions">
+        <button type="button" class="btn btn-secondary" id="btn-wizard-prev">← Previous</button>
+        <button type="button" class="btn btn-primary" id="btn-wizard-next">Next Step →</button>
+        <button type="submit" class="btn btn-primary btn-lg" id="btn-wizard-submit" style="display: none;">
+          Analyze Profile & Generate Roadmap 🚀
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/wizard.js') }}"></script>
+{% endblock %}

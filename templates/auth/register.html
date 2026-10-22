@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Create Free Account — CareerNova AI (Instant Access){% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 580px; padding-top: 3rem; padding-bottom: 5rem;">
+  <div class="glass-card reveal">
+    <div style="text-align: center; margin-bottom: 1.75rem;">
+      <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">⚡ Instant Access &middot; Zero Verification</span>
+      <h2>Start Your Career Journey</h2>
+      <p style="margin-top: 0.4rem; font-size: 0.92rem;">
+        Sign up with any test email and password. No OTP, confirmation emails, or real inbox required!
+      </p>
+    </div>
+
+    <!-- Quick Demo Credentials Fill Card -->
+    <div style="background: rgba(6, 182, 212, 0.08); border: 1px dashed var(--border-cyan); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); display: block;">Instant Test Credentials:</span>
+        <span style="font-size: 0.82rem; color: var(--text-secondary); font-family: var(--font-mono);">test_user / test@careernova.ai</span>
+      </div>
+      <button type="button" id="btn-fill-register" class="btn btn-secondary btn-sm" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+        ⚡ Fill Sample Data
+      </button>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.register') }}" id="register-form" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        <label class="form-label" for="username">{{ form.username.label.text }}</label>
+        {{ form.username(class="form-input", placeholder="e.g. alex_nova", id="reg_username") }}
+        <span class="form-error" id="reg_username_error" style="display: none;"></span>
+        {% for error in form.username.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">{{ form.email.label.text }}</label>
+        {{ form.email(class="form-input", placeholder="e.g. test@example.com (any valid format)", id="reg_email") }}
+        <span class="form-error" id="reg_email_error" style="display: none;"></span>
+        {% for error in form.email.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="full_name">{{ form.full_name.label.text }}</label>
+        {{ form.full_name(class="form-input", placeholder="e.g. Alex Morgan", id="reg_fullname") }}
+        {% for error in form.full_name.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label" for="password">{{ form.password.label.text }}</label>
+          {{ form.password(class="form-input", placeholder="Any password (min 4 chars)", id="reg_password") }}
+          <span class="form-error" id="reg_password_error" style="display: none;"></span>
+          {% for error in form.password.errors %}
+            <span class="form-error">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">{{ form.confirm_password.label.text }}</label>
+          {{ form.confirm_password(class="form-input", placeholder="Confirm password", id="reg_confirm") }}
+          <span class="form-error" id="reg_confirm_error" style="display: none;"></span>
+          {% for error in form.confirm_password.errors %}
+            <span class="form-error">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.25rem;">
+        Create Account & Go to Dashboard →
+      </button>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1.25rem; font-size: 0.8rem; color: var(--text-muted);">
+        <span>⚡ Zero Verification Required</span>
+        <span>🛡️ Instant Session Activation</span>
+        <span>🔒 Demo Safe</span>
+      </div>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); font-size: 0.9rem;">
+      <p>
+        Already have test credentials?
+        <a href="{{ url_for('auth.login') }}" class="text-cyan" style="font-weight: 600; text-decoration: none;">Sign in directly</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const regForm = document.getElementById('register-form');
+    const uInput = document.getElementById('reg_username');
+    const eInput = document.getElementById('reg_email');
+    const fInput = document.getElementById('reg_fullname');
+    const pInput = document.getElementById('reg_password');
+    const cInput = document.getElementById('reg_confirm');
+
+    const uError = document.getElementById('reg_username_error');
+    const eError = document.getElementById('reg_email_error');
+    const pError = document.getElementById('reg_password_error');
+    const cError = document.getElementById('reg_confirm_error');
+    const btnFill = document.getElementById('btn-fill-register');
+
+    if (btnFill && uInput && eInput && pInput && cInput) {
+      btnFill.addEventListener('click', () => {
+        const randId = Math.floor(Math.random() * 899) + 100;
+        uInput.value = `test_explorer_${randId}`;
+        eInput.value = `tester_${randId}@careernova.ai`;
+        if (fInput) fInput.value = 'Demo Explorer';
+        pInput.value = 'testpass123';
+        cInput.value = 'testpass123';
+
+        uError.style.display = 'none';
+        eError.style.display = 'none';
+        pError.style.display = 'none';
+        cError.style.display = 'none';
+      });
+    }
+
+    if (regForm && uInput && eInput && pInput && cInput) {
+      regForm.addEventListener('submit', (e) => {
+        let hasError = false;
+
+        uError.style.display = 'none';
+        eError.style.display = 'none';
+        pError.style.display = 'none';
+        cError.style.display = 'none';
+
+        const uVal = uInput.value.trim();
+        const eVal = eInput.value.trim();
+        const pVal = pInput.value;
+        const cVal = cInput.value;
+
+        if (!uVal) {
+          uError.textContent = 'Username is required.';
+          uError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (!eVal) {
+          eError.textContent = 'Email address is required.';
+          eError.style.display = 'block';
+          hasError = true;
+        } else {
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(eVal)) {
+            eError.textContent = 'Please enter a valid email format (e.g. demo@example.com).';
+            eError.style.display = 'block';
+            hasError = true;
+          }
+        }
+
+        if (!pVal) {
+          pError.textContent = 'Password cannot be empty.';
+          pError.style.display = 'block';
+          hasError = true;
+        } else if (pVal.length < 4) {
+          pError.textContent = 'Password must be at least 4 characters.';
+          pError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (pVal && cVal && pVal !== cVal) {
+          cError.textContent = 'Passwords do not match.';
+          cError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (hasError) {
+          e.preventDefault();
+          return false;
+        }
+
+        if (window.DemoAuth) {
+          window.DemoAuth.setUser({
+            email: eVal,
+            username: uVal,
+            fullName: (fInput && fInput.value.trim()) ? fInput.value.trim() : uVal
+          });
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}My Dashboard — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+
+  <!-- Header Welcome -->
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem;" class="reveal">
+    <div>
+      <span class="badge badge-purple" style="margin-bottom: 0.5rem;">User Command Center</span>
+      <h1>Welcome back, <span class="text-gradient">{{ current_user.full_name or current_user.username }}</span></h1>
+      <p style="margin-top: 0.25rem;">Target Role: <strong class="text-white">{{ current_user.target_role or 'Exploring Pathways' }}</strong> &middot; Level: <strong class="text-cyan">{{ current_user.experience_level }}</strong></p>
+    </div>
+    <div style="display: flex; gap: 0.75rem;">
+      <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary">
+        + Retake Assessment
+      </a>
+      <a href="{{ url_for('dashboard.profile') }}" class="btn btn-secondary">
+        Edit Profile
+      </a>
+    </div>
+  </div>
+
+  <!-- Metric Statistics Cards -->
+  <div class="dashboard-grid reveal">
+    <div class="stat-card">
+      <div class="stat-icon">📊</div>
+      <div class="stat-info">
+        <h4>{{ assessments_count }}</h4>
+        <p>Assessments Completed</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">🎯</div>
+      <div class="stat-info">
+        <h4>{{ latest_assessment.top_career_score if latest_assessment else 0 }}%</h4>
+        <p>Top Career Alignment</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">⭐</div>
+      <div class="stat-info">
+        <h4>{{ saved_careers|length }}</h4>
+        <p>Saved Roadmaps</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">⚡</div>
+      <div class="stat-info">
+        <h4>{{ mastery_percent }}%</h4>
+        <p>Skill Acquisition Rate</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Assessment Callout -->
+  {% if latest_assessment %}
+    <div class="glass-card reveal" style="padding: 2rem; margin-bottom: 2.5rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%); border-color: var(--border-glow);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <span class="badge badge-purple" style="margin-bottom: 0.5rem;">Latest Evaluation &middot; {{ latest_assessment.created_at.strftime('%b %d, %Y') }}</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.3rem;">Top Match: {{ latest_assessment.top_career_title }}</h3>
+          <p class="text-secondary" style="margin: 0;">
+            Based on your {{ latest_assessment.education_level }} background and selected skills.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <div style="text-align: center;">
+            <span style="font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan);">{{ latest_assessment.top_career_score }}%</span>
+            <span style="display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Score</span>
+          </div>
+          <a href="{{ url_for('assessment.results_detail', assessment_id=latest_assessment.id) }}" class="btn btn-primary">
+            View Assessment Roadmap →
+          </a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="glass-card reveal" style="text-align: center; padding: 3rem 2rem; margin-bottom: 2.5rem;">
+      <h3>You Haven't Taken an Assessment Yet</h3>
+      <p class="text-muted" style="max-width: 500px; margin: 0.5rem auto 1.5rem;">
+        Calibrate your skills and discover your exact career match score by completing our 3-minute technical questionnaire.
+      </p>
+      <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary btn-lg">
+        Start First Assessment Now →
+      </a>
+    </div>
+  {% endif %}
+
+  <!-- Two-Column Layout: Saved Careers & Active Skill Board Preview -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;" class="reveal">
+    <!-- Saved Careers Box -->
+    <div class="glass-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h4>Saved Career Roadmaps</h4>
+        <a href="{{ url_for('dashboard.saved_careers_list') }}" class="text-cyan" style="font-size: 0.88rem; text-decoration: none;">View All ({{ saved_careers|length }}) →</a>
+      </div>
+
+      {% if saved_careers %}
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          {% for item in saved_careers[:4] %}
+            <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h5 style="color: var(--text-white); margin-bottom: 0.2rem;">{{ item.record.career_title }}</h5>
+                <span style="font-size: 0.78rem; color: var(--accent-emerald);">{{ item.meta.salary_range.median if item.meta else 'High Demand' }}</span>
+              </div>
+              <a href="{{ url_for('main.career_detail', career_key=item.record.career_key) }}" class="btn btn-secondary btn-sm">
+                Open Curriculum
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted" style="font-size: 0.9rem;">
+          No saved careers yet. Bookmark careers from the <a href="{{ url_for('main.careers_list') }}" class="text-cyan">Career Library</a> to track your progress here.
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Active Skill Tracking Box -->
+    <div class="glass-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h4>Active Skill Acquisition</h4>
+        <a href="{{ url_for('dashboard.skills_board') }}" class="text-cyan" style="font-size: 0.88rem; text-decoration: none;">Open Kanban Board →</a>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-purple-light); font-weight: 700;">To Learn ({{ skills_to_learn|length }})</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+            {% for s in skills_to_learn[:5] %}
+              <span class="skill-tag skill-tag-gap">{{ s.skill_name }}</span>
+            {% else %}
+              <span class="text-muted" style="font-size: 0.85rem;">No skills queued.</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div style="margin-top: 0.5rem;">
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700;">In Progress ({{ skills_in_progress|length }})</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+            {% for s in skills_in_progress[:5] %}
+              <span class="skill-tag" style="border-color: var(--accent-cyan); color: #67e8f9;">{{ s.skill_name }}</span>
+            {% else %}
+              <span class="text-muted" style="font-size: 0.85rem;">No skills currently in progress.</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div style="margin-top: 0.5rem;">
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: #34d399; font-weight: 700;">Mastered ({{ skills_completed|length }})</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+            {% for s in skills_completed[:5] %}
+              <span class="skill-tag skill-tag-matched">{{ s.skill_name }}</span>
+            {% else %}
+              <span class="text-muted" style="font-size: 0.85rem;">Mark skills complete to see them here!</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

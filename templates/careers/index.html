@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Explore 18+ High-Growth Tech & AI Careers — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="text-align: center; max-width: 760px; margin: 0 auto 3rem;" class="reveal">
+    <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">Verified Industry Curriculum</span>
+    <h1>Future-Proof Tech Career Library</h1>
+    <p style="margin-top: 0.5rem; font-size: 1.1rem;">
+      Deep dive into the 18 most influential careers in tech, artificial intelligence, software engineering,
+      cloud architecture, cybersecurity, and product management.
+    </p>
+
+    <!-- Search & Filter Controls -->
+    <form method="GET" action="{{ url_for('main.careers_list') }}" style="margin-top: 2rem; display: flex; gap: 0.75rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <input type="text" name="q" value="{{ search_query }}" class="form-input" placeholder="Search by role or skill (e.g. Python, Docker, AI, Figma)...">
+      {% if selected_category %}
+        <input type="hidden" name="category" value="{{ selected_category }}">
+      {% endif %}
+      <button type="submit" class="btn btn-primary">Search</button>
+      {% if search_query or selected_category %}
+        <a href="{{ url_for('main.careers_list') }}" class="btn btn-secondary">Clear</a>
+      {% endif %}
+    </form>
+
+    <!-- Category Filter Pills -->
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;">
+      <a href="{{ url_for('main.careers_list', q=search_query) }}" class="badge {% if not selected_category %}badge-purple{% else %}badge-cyan{% endif %}" style="text-decoration: none; padding: 0.45rem 1rem;">
+        All Domains ({{ total_careers }})
+      </a>
+      {% for cat in categories %}
+        <a href="{{ url_for('main.careers_list', category=cat, q=search_query) }}" class="badge {% if selected_category == cat %}badge-purple{% else %}badge-cyan{% endif %}" style="text-decoration: none; padding: 0.45rem 1rem;">
+          {{ cat }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Career Cards Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.75rem;">
+    {% for career in careers %}
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">{{ career.category }}</span>
+            <span class="badge badge-purple">{{ career.badge }}</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="{{ url_for('main.career_detail', career_key=career.key) }}" style="color: inherit; text-decoration: none;">
+              {{ career.title }}
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            {{ career.tagline }}
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">{{ career.salary_range.median }}</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">{{ career.growth_rate.split(' ')[0] }}</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              {% for skill in career.core_skills[:5] %}
+                <span class="skill-tag">{{ skill }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="{{ url_for('main.career_detail', career_key=career.key) }}" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="glass-card" style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+        <h3>No careers match your search criteria</h3>
+        <p class="text-muted" style="margin-top: 0.5rem;">Try clearing your query or exploring all domains.</p>
+        <a href="{{ url_for('main.careers_list') }}" class="btn btn-secondary" style="margin-top: 1.5rem;">
+          View All Careers
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

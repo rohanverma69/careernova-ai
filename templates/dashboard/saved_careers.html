@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Career Roadmaps — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem;" class="reveal">
+    <div>
+      <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        <a href="{{ url_for('dashboard.overview') }}" style="color: var(--text-secondary); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 0.5rem;">/</span>
+        <span style="color: var(--accent-cyan);">Saved Roadmaps</span>
+      </div>
+      <h1>My Saved Career Tracks</h1>
+      <p>Your pinned target career roadmaps, preparation stages, and curated curriculums.</p>
+    </div>
+    <a href="{{ url_for('main.careers_list') }}" class="btn btn-secondary">
+      + Browse Career Library
+    </a>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.75rem;">
+    {% for item in saved_careers %}
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-purple">{{ item.record.status|capitalize }}</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Saved {{ item.record.created_at.strftime('%b %d') }}</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            {{ item.record.career_title }}
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            {{ item.meta.tagline if item.meta else 'Custom saved career goal.' }}
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
+            <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Compensation</span>
+            <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">
+              {{ item.meta.salary_range.median if item.meta else 'Competitive' }}
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="{{ url_for('main.career_detail', career_key=item.record.career_key) }}" class="btn btn-primary btn-sm" style="flex: 1;">
+            Open Roadmap →
+          </a>
+          <button class="btn btn-secondary btn-sm" onclick="toggleSaveCareer('{{ item.record.career_key }}', this); setTimeout(() => window.location.reload(), 400);">
+            Remove
+          </button>
+        </div>
+      </div>
+    {% else %}
+      <div class="glass-card reveal" style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+        <h3>No Saved Careers Found</h3>
+        <p class="text-muted" style="max-width: 480px; margin: 0.5rem auto 1.5rem;">
+          You haven't bookmarked any careers yet. Explore our 18+ comprehensive tech tracks and click "Save Path".
+        </p>
+        <a href="{{ url_for('main.careers_list') }}" class="btn btn-primary">
+          Explore Career Library →
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

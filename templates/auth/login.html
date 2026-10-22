@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In — CareerNova AI (Demo Mode Active){% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 520px; padding-top: 3rem; padding-bottom: 5rem;">
+  <div class="glass-card reveal">
+    <div style="text-align: center; margin-bottom: 1.75rem;">
+      <span class="badge badge-purple" style="margin-bottom: 0.75rem;">⚡ Instant Access &middot; Zero Verification</span>
+      <h2>Sign In to CareerNova</h2>
+      <p style="margin-top: 0.4rem; font-size: 0.92rem;">
+        Enter any test email and password to access your dashboard. No email confirmation or real inbox required!
+      </p>
+    </div>
+
+    <!-- Quick Demo Credentials Fill Card -->
+    <div style="background: rgba(139, 92, 246, 0.1); border: 1px dashed var(--border-glow); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-purple-light); display: block;">Demo Credentials:</span>
+        <span style="font-size: 0.82rem; color: var(--text-secondary); font-family: var(--font-mono);">demo@careernova.ai / demopass123</span>
+      </div>
+      <button type="button" id="btn-fill-demo" class="btn btn-secondary btn-sm" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+        ⚡ Fill Credentials
+      </button>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.login', next=request.args.get('next')) }}" id="login-form" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        <label class="form-label" for="login_id">{{ form.login_id.label.text }}</label>
+        {{ form.login_id(class="form-input", placeholder="e.g. demo@careernova.ai or test@example.com", id="login_id") }}
+        <span class="form-error" id="login_id_error" style="display: none;"></span>
+        {% for error in form.login_id.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <label class="form-label" for="password" style="margin-bottom: 0;">{{ form.password.label.text }}</label>
+        </div>
+        {{ form.password(class="form-input", placeholder="Enter any test password", id="password") }}
+        <span class="form-error" id="password_error" style="display: none;"></span>
+        {% for error in form.password.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem;">
+        {{ form.remember_me(style="accent-color: var(--accent-purple); width: 1.1rem; height: 1.1rem; cursor: pointer;") }}
+        <label for="remember_me" style="font-size: 0.88rem; color: var(--text-secondary); cursor: pointer; user-select: none;">
+          {{ form.remember_me.label.text }}
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.25rem;">
+        Sign In to Dashboard →
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); font-size: 0.9rem;">
+      <p>
+        Want to register a new test user?
+        <a href="{{ url_for('auth.register') }}" class="text-cyan" style="font-weight: 600; text-decoration: none;">Create test account</a>
+      </p>
+      <p style="margin-top: 0.6rem;">
+        <a href="{{ url_for('assessment.wizard') }}" class="text-muted" style="text-decoration: none; font-size: 0.85rem;">
+          Or take assessment as a guest first →
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    const loginIdInput = document.getElementById('login_id');
+    const passwordInput = document.getElementById('password');
+    const loginIdError = document.getElementById('login_id_error');
+    const passwordError = document.getElementById('password_error');
+    const btnFillDemo = document.getElementById('btn-fill-demo');
+
+    // Quick Fill Demo Credentials
+    if (btnFillDemo && loginIdInput && passwordInput) {
+      btnFillDemo.addEventListener('click', () => {
+        loginIdInput.value = 'demo@careernova.ai';
+        passwordInput.value = 'demopass123';
+        loginIdError.style.display = 'none';
+        passwordError.style.display = 'none';
+      });
+    }
+
+    // Client-side Validation & LocalStorage Persistence
+    if (loginForm && loginIdInput && passwordInput) {
+      loginForm.addEventListener('submit', (e) => {
+        let hasError = false;
+        const loginVal = loginIdInput.value.trim();
+        const passVal = passwordInput.value;
+
+        // Reset errors
+        loginIdError.style.display = 'none';
+        passwordError.style.display = 'none';
+
+        // 1. Check for empty email/username
+        if (!loginVal) {
+          loginIdError.textContent = 'Please enter your email or username.';
+          loginIdError.style.display = 'block';
+          hasError = true;
+        } else if (loginVal.includes('@')) {
+          // 2. Validate email format
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(loginVal)) {
+            loginIdError.textContent = 'Please enter a valid email format (e.g. demo@example.com).';
+            loginIdError.style.display = 'block';
+            hasError = true;
+          }
+        }
+
+        // 3. Check for empty password
+        if (!passVal) {
+          passwordError.textContent = 'Password cannot be empty.';
+          passwordError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (hasError) {
+          e.preventDefault();
+          return false;
+        }
+
+        // Store demo user in localStorage for persistent client session
+        if (window.DemoAuth) {
+          window.DemoAuth.setUser({
+            email: loginVal.includes('@') ? loginVal : `${loginVal}@careernova.local`,
+            username: loginVal.includes('@') ? loginVal.split('@')[0] : loginVal
+          });
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Settings — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 680px; padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="margin-bottom: 2rem;" class="reveal">
+    <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+      <a href="{{ url_for('dashboard.overview') }}" style="color: var(--text-secondary); text-decoration: none;">Dashboard</a>
+      <span style="margin: 0 0.5rem;">/</span>
+      <span style="color: var(--accent-cyan);">Profile Settings</span>
+    </div>
+    <h1>Account & Career Preferences</h1>
+    <p>Manage your account identity, current experience tier, and target career ambitions.</p>
+  </div>
+
+  <div class="glass-card reveal">
+    <form method="POST" action="{{ url_for('dashboard.profile') }}">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        <label class="form-label" for="full_name">{{ form.full_name.label.text }}</label>
+        {{ form.full_name(class="form-input") }}
+        {% for error in form.full_name.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="target_role">{{ form.target_role.label.text }}</label>
+        {{ form.target_role(class="form-input", placeholder="e.g. Senior Machine Learning Engineer") }}
+        <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; display: block;">
+          Your target role anchors the AI advisor's personalized 90-day milestone recommendations.
+        </span>
+        {% for error in form.target_role.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="experience_level">{{ form.experience_level.label.text }}</label>
+        {{ form.experience_level(class="form-select") }}
+        {% for error in form.experience_level.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="bio">{{ form.bio.label.text }}</label>
+        {{ form.bio(class="form-textarea") }}
+        {% for error in form.bio.errors %}
+          <span class="form-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+        <a href="{{ url_for('dashboard.overview') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment History — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="margin-bottom: 2rem;" class="reveal">
+    <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+      <a href="{{ url_for('dashboard.overview') }}" style="color: var(--text-secondary); text-decoration: none;">Dashboard</a>
+      <span style="margin: 0 0.5rem;">/</span>
+      <span style="color: var(--accent-cyan);">History</span>
+    </div>
+    <h1>Assessment Archive & Historical Evaluations</h1>
+    <p>Review how your skill calibrations and career recommendations have evolved over time.</p>
+  </div>
+
+  <div class="glass-card reveal">
+    {% if assessments %}
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">
+              <th style="padding: 1rem;">Date</th>
+              <th style="padding: 1rem;">Top Career Recommendation</th>
+              <th style="padding: 1rem;">Match Score</th>
+              <th style="padding: 1rem;">Skills Evaluated</th>
+              <th style="padding: 1rem; text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for a in assessments %}
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                <td style="padding: 1.25rem 1rem; color: var(--text-secondary); white-space: nowrap;">
+                  {{ a.created_at.strftime('%b %d, %Y') }}
+                </td>
+                <td style="padding: 1.25rem 1rem;">
+                  <strong style="color: var(--text-white); font-size: 1rem;">{{ a.top_career_title }}</strong>
+                  <span style="display: block; font-size: 0.78rem; color: var(--text-muted);">{{ a.education_level }} &middot; {{ a.experience_years }}</span>
+                </td>
+                <td style="padding: 1.25rem 1rem;">
+                  <span class="badge {% if a.top_career_score >= 80 %}badge-emerald{% elif a.top_career_score >= 60 %}badge-cyan{% else %}badge-purple{% endif %}">
+                    {{ a.top_career_score }}% Match
+                  </span>
+                </td>
+                <td style="padding: 1.25rem 1rem; color: var(--text-secondary);">
+                  {{ a.primary_skills|length }} skills, {{ a.interests|length }} interests
+                </td>
+                <td style="padding: 1.25rem 1rem; text-align: right; white-space: nowrap;">
+                  <a href="{{ url_for('assessment.results_detail', assessment_id=a.id) }}" class="btn btn-secondary btn-sm">
+                    View Results Roadmap →
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div style="text-align: center; padding: 4rem 2rem;">
+        <h3>No Assessment History Found</h3>
+        <p class="text-muted" style="margin-top: 0.5rem;">Take your first diagnostic to calibrate your career trajectory.</p>
+        <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary" style="margin-top: 1.5rem;">
+          Start Assessment Now
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

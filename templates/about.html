@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Methodology & Architecture — CareerNova AI{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 860px; padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="text-align: center; margin-bottom: 3.5rem;" class="reveal">
+    <span class="badge badge-purple" style="margin-bottom: 0.75rem;">Engineering Principles</span>
+    <h1>How CareerNova AI Operates</h1>
+    <p style="font-size: 1.15rem; margin-top: 0.5rem;">
+      A transparent, deterministic career recommendation engine paired with an optional generative AI executive layer.
+    </p>
+  </div>
+
+  <div class="glass-card reveal" style="margin-bottom: 2.5rem;">
+    <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">1. Deterministic Multi-Factor Alignment</h3>
+    <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">
+      Unlike generic chatbots that often hallucinate career advice or generate superficial suggestions,
+      CareerNova uses a mathematically grounded multi-factor evaluation algorithm:
+    </p>
+    <ul style="padding-left: 1.5rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+      <li><strong class="text-white">Core Skill Overlap (Weight: 3.0x):</strong> We compute direct matches against verified industry requirements for each role.</li>
+      <li><strong class="text-white">Secondary Toolchains (Weight: 1.5x):</strong> Supporting competencies like Git, Docker, cloud platforms, and testing.</li>
+      <li><strong class="text-white">Domain Passion Alignment:</strong> Interest vectors that correlate with daily problem types.</li>
+      <li><strong class="text-white">Work Environment Preference:</strong> Remote, high-availability, research-heavy, or fast-paced startup squads.</li>
+    </ul>
+    <div style="background: rgba(139, 92, 246, 0.1); border-left: 3px solid var(--accent-purple); padding: 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+      <p style="margin: 0; font-size: 0.9rem; color: var(--text-primary);">
+        ✦ <strong class="text-white">Explainability Guarantee:</strong> Every recommendation clearly separates the skills you already possess from the high-leverage skills you must prioritize.
+      </p>
+    </div>
+  </div>
+
+  <div class="glass-card reveal" style="margin-bottom: 2.5rem;">
+    <h3 style="color: var(--accent-purple-light); margin-bottom: 1rem;">2. Dual Intelligence Architecture</h3>
+    <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">
+      CareerNova was engineered from day one to operate with 100% functionality without requiring external paid API keys.
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem;">
+      <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+        <h5 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">Core Engine (Always Active)</h5>
+        <p style="font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary); margin: 0;">
+          Generates instant match percentages, radar dimensions, 4-stage curriculums, and heuristic action plans with 0ms external API delay.
+        </p>
+      </div>
+      <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+        <h5 style="color: var(--accent-purple-light); margin-bottom: 0.5rem;">AI Executive Layer (Optional)</h5>
+        <p style="font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary); margin: 0;">
+          When an <code style="color: var(--accent-cyan);">AI_API_KEY</code> is present in environment variables, the platform calls Google Gemini 1.5 Flash to synthesize dynamic customized interview strategies.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card reveal">
+    <h3 style="color: #34d399; margin-bottom: 1rem;">3. Production & Vercel Native Architecture</h3>
+    <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">
+      The application runs as a modern Flask WSGI serverless function natively compatible with Vercel's Python 3.12 runtime:
+    </p>
+    <ul style="padding-left: 1.5rem; line-height: 1.8; color: var(--text-secondary);">
+      <li><strong class="text-white">Serverless PostgreSQL Pooling:</strong> Built for managed providers like Neon and Supabase, with automatic <code style="color: var(--accent-cyan);">pool_pre_ping</code> and SSL enforcement.</li>
+      <li><strong class="text-white">Strict Security Standards:</strong> Scrypt password hashing via Werkzeug, CSRF token validation on all state mutations, and HTTPS-enforced session cookies.</li>
+      <li><strong class="text-white">Zero Local File Dependencies:</strong> No brittle persistent local disk storage or heavy unoptimized packages.</li>
+    </ul>
+
+    <div style="margin-top: 2rem; text-align: center;">
+      <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary btn-lg">
+        Take Career Assessment Now →
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

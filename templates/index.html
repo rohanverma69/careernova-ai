@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+
+{% block title %}CareerNova AI — Next-Gen AI Career Guidance & Learning Roadmap Platform{% endblock %}
+
+{% block content %}
+<!-- ==========================================================
+     Hero Section
+     ========================================================== -->
+<section class="hero-section">
+  <div class="container hero-content">
+    <div class="badge-pill-hero reveal">
+      <span style="color: var(--accent-cyan);">✦</span>
+      <span>Next-Gen AI Career Guidance Engine</span>
+      <span style="opacity: 0.5;">|</span>
+      <span>Vercel Native &middot; Python 3.12+</span>
+    </div>
+
+    <h1 class="hero-title reveal">
+      Navigate Your Next <br>
+      <span class="text-gradient">High-Impact Tech Career</span> with AI Precision
+    </h1>
+
+    <p class="hero-subtitle reveal">
+      Stop guessing your career trajectory. Discover future-proof engineering, AI, design, and cybersecurity roles
+      custom-matched to your skills. Get an instant skill-gap analysis, 90-day action plan, and curated roadmaps.
+    </p>
+
+    <div class="hero-cta-group reveal">
+      <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary btn-lg">
+        <span>Start Free Career Assessment</span>
+        <span>→</span>
+      </a>
+      <a href="{{ url_for('main.careers_list') }}" class="btn btn-secondary btn-lg">
+        <span>Explore 18+ Careers</span>
+      </a>
+    </div>
+
+    <!-- Live Metric Chips -->
+    <div class="hero-metrics reveal">
+      <div class="metric-card">
+        <span class="metric-num text-gradient">18+</span>
+        <span class="metric-label">Future-Proof Tech Roles</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-num text-cyan">98.4%</span>
+        <span class="metric-label">Skill Match Precision</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-num text-purple">100%</span>
+        <span class="metric-label">Zero-Key Fallback Core</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     Interactive Career Match Preview Simulation
+     ========================================================== -->
+<section style="padding: 2rem 0 5rem;">
+  <div class="container">
+    <div class="glass-card reveal" style="padding: 2.5rem; border-color: var(--border-glow); box-shadow: var(--shadow-glow);">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.25rem;">
+        <div>
+          <span class="badge badge-purple" style="margin-bottom: 0.5rem;">Live Architecture Preview</span>
+          <h3>How Our Multi-Factor Engine Evaluates You</h3>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn btn-sm btn-primary demo-tab-btn" data-target="preview-ai">AI & Machine Learning</button>
+          <button class="btn btn-sm btn-secondary demo-tab-btn" data-target="preview-fullstack">Full-Stack Web Dev</button>
+          <button class="btn btn-sm btn-secondary demo-tab-btn" data-target="preview-cloud">Cloud & DevOps</button>
+        </div>
+      </div>
+
+      <!-- Preview Panels -->
+      <div id="preview-ai" class="demo-preview-pane">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span class="match-score-badge" style="width: 70px; height: 70px; font-size: 1.4rem;">92%</span>
+              <div>
+                <h4 style="font-size: 1.3rem;">AI & Machine Learning Engineer</h4>
+                <p class="text-muted">Median Compensation: <strong class="text-white">$162,000 / yr</strong> &middot; Growth: <strong class="text-emerald">+32%</strong></p>
+              </div>
+            </div>
+            <p style="margin-bottom: 1.25rem; font-size: 0.95rem;">
+              High alignment detected: Strong foundations in Python, mathematical statistics, and data structures.
+              Targeting PyTorch and MLOps deployment creates an immediate bridge to senior packages.
+            </p>
+            <div style="margin-bottom: 1rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-emerald); font-weight: 700;">Matched Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-matched">Python</span>
+                <span class="skill-tag skill-tag-matched">Machine Learning</span>
+                <span class="skill-tag skill-tag-matched">Math & Statistics</span>
+                <span class="skill-tag skill-tag-matched">SQL</span>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-purple-light); font-weight: 700;">Priority Skill Gap to Learn:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-gap">PyTorch</span>
+                <span class="skill-tag skill-tag-gap">MLOps & Docker</span>
+              </div>
+            </div>
+          </div>
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-white);">AI Advisor Executive Synthesis</span>
+              <span class="badge badge-cyan">Structured Insight</span>
+            </div>
+            <blockquote style="font-size: 0.9rem; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+              "Dedicate 4-6 hours weekly to transformer fine-tuning. Building a domain RAG application with vector search is your single highest-leverage portfolio move this quarter."
+            </blockquote>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              ✦ 90-day action plan &middot; ✦ Targeted interview defense &middot; ✦ Verified salary benchmarks
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="preview-fullstack" class="demo-preview-pane" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span class="match-score-badge" style="width: 70px; height: 70px; font-size: 1.4rem; border-color: var(--accent-purple);">88%</span>
+              <div>
+                <h4 style="font-size: 1.3rem;">Full-Stack Web Developer</h4>
+                <p class="text-muted">Median Compensation: <strong class="text-white">$128,000 / yr</strong> &middot; Growth: <strong class="text-emerald">+25%</strong></p>
+              </div>
+            </div>
+            <p style="margin-bottom: 1.25rem; font-size: 0.95rem;">
+              Broad software engineering synergy: Rapid execution with JavaScript, React, and REST APIs.
+              Expanding into PostgreSQL schema migrations and containerized cloud deployments completes the profile.
+            </p>
+            <div style="margin-bottom: 1rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-emerald); font-weight: 700;">Matched Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-matched">JavaScript</span>
+                <span class="skill-tag skill-tag-matched">React</span>
+                <span class="skill-tag skill-tag-matched">HTML5 & CSS3</span>
+                <span class="skill-tag skill-tag-matched">Git</span>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-purple-light); font-weight: 700;">Priority Skill Gap to Learn:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-gap">TypeScript</span>
+                <span class="skill-tag skill-tag-gap">PostgreSQL ORM</span>
+              </div>
+            </div>
+          </div>
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-white);">AI Advisor Executive Synthesis</span>
+              <span class="badge badge-purple">Structured Insight</span>
+            </div>
+            <blockquote style="font-size: 0.9rem; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+              "Transition your codebase to strict TypeScript and add automated GitHub Actions CI/CD tests. This shifts you from a junior builder to a senior autonomous engineer."
+            </blockquote>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              ✦ End-to-end full stack architecture &middot; ✦ Production deployment playbooks
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="preview-cloud" class="demo-preview-pane" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span class="match-score-badge" style="width: 70px; height: 70px; font-size: 1.4rem; border-color: var(--accent-emerald);">85%</span>
+              <div>
+                <h4 style="font-size: 1.3rem;">Cloud & DevOps Architect</h4>
+                <p class="text-muted">Median Compensation: <strong class="text-white">$150,000 / yr</strong> &middot; Growth: <strong class="text-emerald">+27%</strong></p>
+              </div>
+            </div>
+            <p style="margin-bottom: 1.25rem; font-size: 0.95rem;">
+              Systems reliability and automation alignment: High affinity with Linux environments and containerization.
+              Mastering Kubernetes clusters and Terraform IaC opens enterprise architect roles.
+            </p>
+            <div style="margin-bottom: 1rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-emerald); font-weight: 700;">Matched Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-matched">Linux / Bash</span>
+                <span class="skill-tag skill-tag-matched">Docker</span>
+                <span class="skill-tag skill-tag-matched">Git</span>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent-purple-light); font-weight: 700;">Priority Skill Gap to Learn:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;">
+                <span class="skill-tag skill-tag-gap">Kubernetes</span>
+                <span class="skill-tag skill-tag-gap">Terraform</span>
+              </div>
+            </div>
+          </div>
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-white);">AI Advisor Executive Synthesis</span>
+              <span class="badge badge-emerald">Structured Insight</span>
+            </div>
+            <blockquote style="font-size: 0.9rem; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+              "Provision a multi-AZ AWS infrastructure strictly using Terraform code. Real-world Infrastructure as Code experience carries 3x the weight of paper cloud certs."
+            </blockquote>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              ✦ Zero-downtime deployment patterns &middot; ✦ Observability & monitoring stacks
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     Core Platform Features Grid
+     ========================================================== -->
+<section style="padding: 4rem 0;">
+  <div class="container">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto 3.5rem;" class="reveal">
+      <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">Engineered for Clarity</span>
+      <h2>Why CareerNova Outperforms Traditional Career Tests</h2>
+      <p style="margin-top: 0.75rem;">
+        No vague personality quizzes. We calculate technical compatibility, quantify concrete skill gaps,
+        and generate executable 4-phase learning milestones.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(139, 92, 246, 0.2); color: var(--accent-purple-light);">
+          🎯
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">Multi-Factor Alignment Engine</h4>
+        <p>
+          Weighted scoring evaluates core competencies, secondary toolchains, domain passions, and work-style compatibility for transparent match percentages.
+        </p>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">
+          📊
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">Precision Skill-Gap Radar</h4>
+        <p>
+          Visualize your readiness across 6 foundational technical dimensions: Software Engineering, AI & Data, Cloud, Systems & Security, Product, and UI Design.
+        </p>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(16, 185, 129, 0.2); color: #34d399;">
+          🗺️
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">4-Stage Milestone Roadmaps</h4>
+        <p>
+          Every career path breaks down into structured phases: Foundations, Core Tech, Advanced Implementation, and Production Portfolio Projects.
+        </p>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(245, 158, 11, 0.2); color: #fbbf24;">
+          💼
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">Compensation & Growth Data</h4>
+        <p>
+          Make strategic career decisions with verified market compensation tiers (Entry, Median, Senior) and 10-year industry expansion outlooks.
+        </p>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(59, 130, 246, 0.2); color: #60a5fa;">
+          🤖
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">Dual Intelligence Architecture</h4>
+        <p>
+          100% functional out-of-the-box with deterministic heuristic rules. When configured with a Gemini API key, it unlocks live generative narrative counseling.
+        </p>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="stat-icon" style="margin-bottom: 1.25rem; background: rgba(244, 63, 94, 0.2); color: #fb7185;">
+          🔒
+        </div>
+        <h4 style="margin-bottom: 0.5rem;">Vercel Serverless & Secure</h4>
+        <p>
+          Native Python 3.12+ deployment on Vercel with PostgreSQL connection pooling, CSRF protection, and Scrypt password hashing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     Featured High-Demand Career Tracks
+     ========================================================== -->
+<section style="padding: 4rem 0 6rem; background: rgba(7, 12, 26, 0.5);">
+  <div class="container">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem;" class="reveal">
+      <div>
+        <span class="badge badge-purple" style="margin-bottom: 0.75rem;">Verified Industry Tracks</span>
+        <h2>Explore High-Growth Roles</h2>
+        <p>Curated curriculums and roadmaps for tomorrow's most influential technology positions.</p>
+      </div>
+      <a href="{{ url_for('main.careers_list') }}" class="btn btn-secondary">View All 18 Careers →</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.75rem;">
+      {% for career in featured_careers %}
+        <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <span class="badge badge-cyan">{{ career.category }}</span>
+              <span style="font-size: 0.8rem; color: var(--accent-emerald); font-weight: 700;">{{ career.salary_range.median }} / yr</span>
+            </div>
+            <h4 style="margin-bottom: 0.5rem;">{{ career.title }}</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1.25rem; line-height: 1.5;">{{ career.tagline }}</p>
+
+            <div style="margin-bottom: 1.25rem;">
+              <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Core Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                {% for skill in career.core_skills[:4] %}
+                  <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">{{ career.growth_rate.split(' ')[0] }} Growth</span>
+            <a href="{{ url_for('main.career_detail', career_key=career.key) }}" class="btn btn-sm btn-outline-cyan">Explore Path →</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     Final Call to Action
+     ========================================================== -->
+<section style="padding: 5rem 0 6rem; text-align: center;">
+  <div class="container reveal">
+    <div class="glass-card" style="padding: 4rem 2rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.12) 100%); border-color: var(--border-glow); box-shadow: var(--shadow-glow); max-width: 860px; margin: 0 auto;">
+      <h2 style="margin-bottom: 1rem;">Ready to Accelerate Your Career Trajectory?</h2>
+      <p style="font-size: 1.15rem; max-width: 600px; margin: 0 auto 2.5rem;">
+        Take the free 3-minute technical career assessment. Get an immediate match breakdown,
+        identify your exact skill gaps, and execute a 90-day learning roadmap.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="{{ url_for('assessment.wizard') }}" class="btn btn-primary btn-lg">
+          Take Assessment Now →
+        </a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-secondary btn-lg">
+          Create Free Account
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Interactive preview tab switcher
+  document.querySelectorAll('.demo-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.demo-tab-btn').forEach(b => {
+        b.classList.remove('btn-primary');
+        b.classList.add('btn-secondary');
+      });
+      btn.classList.add('btn-primary');
+      btn.classList.remove('btn-secondary');
+
+      const targetId = btn.getAttribute('data-target');
+      document.querySelectorAll('.demo-preview-pane').forEach(p => p.style.display = 'none');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.style.display = 'block';
+    });
+  });
+</script>
+{% endblock %}
