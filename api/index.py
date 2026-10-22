@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import urllib.parse
 
 # Ensure the root project directory is in sys.path
@@ -22,18 +23,36 @@ class VercelPathFixMiddleware:
 
     def __call__(self, environ, start_response):
         qs = environ.get("QUERY_STRING", "")
+        path_info = environ.get("PATH_INFO", "")
+
+        # Instant diagnostics endpoint
+        if "debug=1" in qs or "debug_wsgi" in path_info:
+            start_response("200 OK", [("Content-Type", "application/json")])
+            debug_info = {
+                "PATH_INFO": environ.get("PATH_INFO"),
+                "QUERY_STRING": environ.get("QUERY_STRING"),
+                "RAW_URI": environ.get("RAW_URI"),
+                "REQUEST_URI": environ.get("REQUEST_URI"),
+                "HTTP_X_FORWARDED_URI": environ.get("HTTP_X_FORWARDED_URI"),
+                "HTTP_X_MATCHED_PATH": environ.get("HTTP_X_MATCHED_PATH"),
+                "HTTP_X_VERCEL_PATH": environ.get("HTTP_X_VERCEL_PATH"),
+                "ALL_MATCHING_KEYS": {
+                    k: environ[k] for k in environ.keys()
+                    if any(w in k for w in ("PATH", "URI", "URL", "ROUTE", "VERCEL"))
+                }
+            }
+            return [json.dumps(debug_info, indent=2).encode("utf-8")]
+
         if qs and "__path=" in qs:
             params = urllib.parse.parse_qs(qs)
             if "__path" in params and params["__path"]:
                 actual_path = params["__path"][0]
-                # Normalize double slashes
                 while "//" in actual_path:
                     actual_path = actual_path.replace("//", "/")
                 if not actual_path.startswith("/"):
                     actual_path = "/" + actual_path
                 environ["PATH_INFO"] = actual_path
                 
-                # Remove __path from query string so endpoints receive clean arguments
                 cleaned_params = {k: v for k, v in params.items() if k != "__path"}
                 environ["QUERY_STRING"] = urllib.parse.urlencode(cleaned_params, doseq=True)
         else:
