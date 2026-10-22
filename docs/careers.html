@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareerNova AI - Next-generation AI career counseling, skill-gap analysis, and personalized learning roadmaps for modern tech careers.">
+  <meta name="theme-color" content="#060913">
+  <meta name="csrf-token" content="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+
+  <title>Explore 18+ High-Growth Tech & AI Careers — CareerNova AI</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <!-- Typography: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Core & Animation Styles -->
+  <link rel="stylesheet" href="./static/css/animations.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+
+  
+</head>
+<body>
+  <!-- Ambient Gradient Background Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-blue"></div>
+  </div>
+
+  <!-- Interactive Particle Mesh Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Flash Alerts Notification Toast Container -->
+  <div class="alert-container" aria-live="polite">
+    
+      
+    
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="./index.html" class="brand">
+        <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+        <span>Career<span class="text-gradient">Nova</span> <span style="font-size: 0.75rem; font-weight: 700; background: rgba(139, 92, 246, 0.2); color: var(--accent-purple-light); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); border: 1px solid rgba(139, 92, 246, 0.4);">AI</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html" class="nav-link ">Home</a></li>
+        <li><a href="./careers.html" class="nav-link active">Career Library</a></li>
+        <li><a href="./assessment.html" class="nav-link ">Take Assessment</a></li>
+        <li><a href="./about.html" class="nav-link ">Methodology</a></li>
+        
+      </ul>
+
+      <!-- Auth Action Buttons -->
+      <div class="nav-auth">
+        
+          <a href="./login.html" class="btn btn-secondary btn-sm">Sign In</a>
+          <a href="./assessment.html" class="btn btn-primary btn-sm">Start Assessment</a>
+        
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content Block -->
+  <main>
+    
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div style="text-align: center; max-width: 760px; margin: 0 auto 3rem;" class="reveal">
+    <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">Verified Industry Curriculum</span>
+    <h1>Future-Proof Tech Career Library</h1>
+    <p style="margin-top: 0.5rem; font-size: 1.1rem;">
+      Deep dive into the 18 most influential careers in tech, artificial intelligence, software engineering,
+      cloud architecture, cybersecurity, and product management.
+    </p>
+
+    <!-- Search & Filter Controls -->
+    <form method="GET" action="/careers" style="margin-top: 2rem; display: flex; gap: 0.75rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <input type="text" name="q" value="" class="form-input" placeholder="Search by role or skill (e.g. Python, Docker, AI, Figma)...">
+      
+      <button type="submit" class="btn btn-primary">Search</button>
+      
+    </form>
+
+    <!-- Category Filter Pills -->
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;">
+      <a href="/careers?q=" class="badge badge-purple" style="text-decoration: none; padding: 0.45rem 1rem;">
+        All Domains (12)
+      </a>
+      
+        <a href="/careers?category=Artificial+Intelligence+%26+Data&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Artificial Intelligence &amp; Data
+        </a>
+      
+        <a href="/careers?category=Cloud+%26+Infrastructure&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Cloud &amp; Infrastructure
+        </a>
+      
+        <a href="/careers?category=Design+%26+User+Experience&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Design &amp; User Experience
+        </a>
+      
+        <a href="/careers?category=Emerging+Tech+%26+Systems&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Emerging Tech &amp; Systems
+        </a>
+      
+        <a href="/careers?category=Product+%26+Strategy&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Product &amp; Strategy
+        </a>
+      
+        <a href="/careers?category=Security+%26+Defense&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Security &amp; Defense
+        </a>
+      
+        <a href="/careers?category=Software+Engineering&amp;q=" class="badge badge-cyan" style="text-decoration: none; padding: 0.45rem 1rem;">
+          Software Engineering
+        </a>
+      
+    </div>
+  </div>
+
+  <!-- Career Cards Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.75rem;">
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Artificial Intelligence &amp; Data</span>
+            <span class="badge badge-purple">Trending &amp; High Demand</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-ai_ml_engineer.html" style="color: inherit; text-decoration: none;">
+              AI &amp; Machine Learning Engineer
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Architect intelligent neural networks, foundation models, and scalable AI systems.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$162,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+32%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Python</span>
+              
+                <span class="skill-tag">Machine Learning</span>
+              
+                <span class="skill-tag">PyTorch</span>
+              
+                <span class="skill-tag">TensorFlow</span>
+              
+                <span class="skill-tag">Math &amp; Statistics</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-ai_ml_engineer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Software Engineering</span>
+            <span class="badge badge-purple">High Demand</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-full_stack_dev.html" style="color: inherit; text-decoration: none;">
+              Full-Stack Web Developer
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Craft end-to-end web applications from responsive frontends to scalable backends.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$128,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+25%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">JavaScript / TypeScript</span>
+              
+                <span class="skill-tag">Python</span>
+              
+                <span class="skill-tag">React</span>
+              
+                <span class="skill-tag">Node.js</span>
+              
+                <span class="skill-tag">HTML5 &amp; CSS3</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-full_stack_dev.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Cloud &amp; Infrastructure</span>
+            <span class="badge badge-purple">Critical Infrastructure</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-cloud_devops_architect.html" style="color: inherit; text-decoration: none;">
+              Cloud &amp; DevOps Architect
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Automate infrastructure, scale resilient Kubernetes clusters, and power CI/CD delivery.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$150,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+27%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Linux / Bash</span>
+              
+                <span class="skill-tag">Docker</span>
+              
+                <span class="skill-tag">Kubernetes</span>
+              
+                <span class="skill-tag">AWS / GCP / Azure</span>
+              
+                <span class="skill-tag">Terraform</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-cloud_devops_architect.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Security &amp; Defense</span>
+            <span class="badge badge-purple">Top Security Priority</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-cybersecurity_engineer.html" style="color: inherit; text-decoration: none;">
+              Cybersecurity Specialist &amp; Ethical Hacker
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Protect digital ecosystems, identify critical vulnerabilities, and neutralize cyber threats.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$142,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+35%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Network Security</span>
+              
+                <span class="skill-tag">Ethical Hacking / Pen Testing</span>
+              
+                <span class="skill-tag">Linux</span>
+              
+                <span class="skill-tag">Python / Bash</span>
+              
+                <span class="skill-tag">SIEM &amp; Threat Analysis</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-cybersecurity_engineer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Artificial Intelligence &amp; Data</span>
+            <span class="badge badge-purple">High Demand</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-data_scientist.html" style="color: inherit; text-decoration: none;">
+              Data Scientist &amp; Analytics Lead
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Turn messy big data into strategic business breakthroughs and predictive intelligence.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$140,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+35%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Python</span>
+              
+                <span class="skill-tag">SQL</span>
+              
+                <span class="skill-tag">Statistics &amp; Probability</span>
+              
+                <span class="skill-tag">Machine Learning</span>
+              
+                <span class="skill-tag">Data Visualization</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-data_scientist.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Design &amp; User Experience</span>
+            <span class="badge badge-purple">Creative &amp; Technical</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-ui_ux_designer.html" style="color: inherit; text-decoration: none;">
+              UI/UX &amp; Product Designer
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Design intuitive user journeys, high-fidelity design systems, and delightful digital apps.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$115,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+16%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Figma</span>
+              
+                <span class="skill-tag">User Research &amp; Usability Testing</span>
+              
+                <span class="skill-tag">Wireframing &amp; Prototyping</span>
+              
+                <span class="skill-tag">Design Systems</span>
+              
+                <span class="skill-tag">UI Visual Design</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-ui_ux_designer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Software Engineering</span>
+            <span class="badge badge-purple">High Demand</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-mobile_developer.html" style="color: inherit; text-decoration: none;">
+              Mobile App Developer (iOS &amp; Android)
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Build fluid, native mobile applications for billions of smartphone users worldwide.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$132,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+23%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Flutter / React Native</span>
+              
+                <span class="skill-tag">Swift / Kotlin</span>
+              
+                <span class="skill-tag">Mobile UI State Management</span>
+              
+                <span class="skill-tag">REST APIs</span>
+              
+                <span class="skill-tag">Git</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-mobile_developer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Product &amp; Strategy</span>
+            <span class="badge badge-purple">Leadership Track</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-product_manager.html" style="color: inherit; text-decoration: none;">
+              Technical Product Manager
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Unite engineering, design, and business strategy to deliver high-impact digital products.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$148,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+20%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Product Roadmap Strategy</span>
+              
+                <span class="skill-tag">Agile / Scrum Methodologies</span>
+              
+                <span class="skill-tag">User Discovery &amp; Interviews</span>
+              
+                <span class="skill-tag">PRD Writing</span>
+              
+                <span class="skill-tag">KPI &amp; Product Analytics</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-product_manager.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Artificial Intelligence &amp; Data</span>
+            <span class="badge badge-purple">High Demand</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-data_engineer.html" style="color: inherit; text-decoration: none;">
+              Data Engineer &amp; Big Data Architect
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Build reliable data pipelines, data warehouses, and streaming infrastructure.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$145,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+30%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">SQL Mastery</span>
+              
+                <span class="skill-tag">Python</span>
+              
+                <span class="skill-tag">Apache Spark / PySpark</span>
+              
+                <span class="skill-tag">Data Modeling (Dimensional)</span>
+              
+                <span class="skill-tag">Airflow / Prefect</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-data_engineer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Cloud &amp; Infrastructure</span>
+            <span class="badge badge-purple">High Compensation</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-sre_engineer.html" style="color: inherit; text-decoration: none;">
+              Site Reliability Engineer (SRE)
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Apply software engineering principles to infrastructure and maintain 99.999% uptime.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$158,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+24%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Linux Internals</span>
+              
+                <span class="skill-tag">Go or Python</span>
+              
+                <span class="skill-tag">Kubernetes</span>
+              
+                <span class="skill-tag">Observability (Prometheus/Grafana)</span>
+              
+                <span class="skill-tag">SLI/SLO Frameworks</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-sre_engineer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Artificial Intelligence &amp; Data</span>
+            <span class="badge badge-purple">High Business Impact</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-bi_analyst.html" style="color: inherit; text-decoration: none;">
+              Business Intelligence (BI) Analyst
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Transform raw business figures into interactive dashboards and executive KPI reports.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$98,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+21%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">SQL</span>
+              
+                <span class="skill-tag">Power BI / Tableau</span>
+              
+                <span class="skill-tag">Excel / Sheets Modeling</span>
+              
+                <span class="skill-tag">Data Warehousing Basics</span>
+              
+                <span class="skill-tag">KPI Definition</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-bi_analyst.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+      <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge badge-cyan">Emerging Tech &amp; Systems</span>
+            <span class="badge badge-purple">Cutting-Edge</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">
+            <a href="./career-blockchain_engineer.html" style="color: inherit; text-decoration: none;">
+              Web3 &amp; Blockchain Engineer
+            </a>
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            Develop decentralized smart contracts, cryptographic protocols, and secure Web3 applications.
+          </p>
+
+          <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Median Salary</span>
+              <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald); margin: 0;">$160,000</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Market Growth</span>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin: 0;">+22%</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">Essential Skills:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              
+                <span class="skill-tag">Solidity / Rust</span>
+              
+                <span class="skill-tag">Smart Contract Security</span>
+              
+                <span class="skill-tag">EVM Architecture</span>
+              
+                <span class="skill-tag">Web3.js / Ethers.js</span>
+              
+                <span class="skill-tag">Foundry / Hardhat</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+          <a href="./career-blockchain_engineer.html" class="btn btn-primary btn-sm btn-block">
+            View Career Path & Roadmap →
+          </a>
+        </div>
+      </div>
+    
+  </div>
+</div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./index.html" class="brand">
+            <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+            <span>Career<span class="text-gradient">Nova</span> AI</span>
+          </a>
+          <p>
+            An AI career navigation platform designed to bridge technical skill gaps,
+            predict high-trajectory career outcomes, and deliver actionable learning roadmaps.
+          </p>
+          <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+            <span class="badge badge-cyan">
+              ● Rule-Based Intelligence
+            </span>
+            <span class="badge badge-purple">Vercel Ready</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="./assessment.html">Career Assessment</a></li>
+            <li><a href="./careers.html">Explore 18+ Careers</a></li>
+            <li><a href="./about.html">Our Methodology</a></li>
+            <li><a href="/api/health">System Health</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Career Paths</h5>
+          <ul>
+            <li><a href="./career-ai_ml_engineer.html">AI & ML Engineer</a></li>
+            <li><a href="./career-full_stack_dev.html">Full-Stack Developer</a></li>
+            <li><a href="./career-cloud_devops_architect.html">Cloud & DevOps</a></li>
+            <li><a href="./career-cybersecurity_engineer.html">Cybersecurity Specialist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            
+              <li><a href="./login.html">Sign In</a></li>
+              <li><a href="./register.html">Create Account</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CareerNova AI. Built for production deployment on Vercel.</p>
+        <p>Zero-compromise privacy: Secrets exclusively environment-driven.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Scripts -->
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/orbs.js"></script>
+  <script src="./static/js/charts.js"></script>
+  <script src="./static/js/dashboard.js"></script>
+
+  
+</body>
+</html>

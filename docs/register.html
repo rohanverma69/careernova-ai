@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareerNova AI - Next-generation AI career counseling, skill-gap analysis, and personalized learning roadmaps for modern tech careers.">
+  <meta name="theme-color" content="#060913">
+  <meta name="csrf-token" content="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+
+  <title>Create Free Account — CareerNova AI (Instant Access)</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <!-- Typography: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Core & Animation Styles -->
+  <link rel="stylesheet" href="./static/css/animations.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+
+  
+</head>
+<body>
+  <!-- Ambient Gradient Background Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-blue"></div>
+  </div>
+
+  <!-- Interactive Particle Mesh Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Flash Alerts Notification Toast Container -->
+  <div class="alert-container" aria-live="polite">
+    
+      
+    
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="./index.html" class="brand">
+        <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+        <span>Career<span class="text-gradient">Nova</span> <span style="font-size: 0.75rem; font-weight: 700; background: rgba(139, 92, 246, 0.2); color: var(--accent-purple-light); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); border: 1px solid rgba(139, 92, 246, 0.4);">AI</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html" class="nav-link ">Home</a></li>
+        <li><a href="./careers.html" class="nav-link ">Career Library</a></li>
+        <li><a href="./assessment.html" class="nav-link ">Take Assessment</a></li>
+        <li><a href="./about.html" class="nav-link ">Methodology</a></li>
+        
+      </ul>
+
+      <!-- Auth Action Buttons -->
+      <div class="nav-auth">
+        
+          <a href="./login.html" class="btn btn-secondary btn-sm">Sign In</a>
+          <a href="./assessment.html" class="btn btn-primary btn-sm">Start Assessment</a>
+        
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content Block -->
+  <main>
+    
+<div class="container" style="max-width: 580px; padding-top: 3rem; padding-bottom: 5rem;">
+  <div class="glass-card reveal">
+    <div style="text-align: center; margin-bottom: 1.75rem;">
+      <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">⚡ Instant Access &middot; Zero Verification</span>
+      <h2>Start Your Career Journey</h2>
+      <p style="margin-top: 0.4rem; font-size: 0.92rem;">
+        Sign up with any test email and password. No OTP, confirmation emails, or real inbox required!
+      </p>
+    </div>
+
+    <!-- Quick Demo Credentials Fill Card -->
+    <div style="background: rgba(6, 182, 212, 0.08); border: 1px dashed var(--border-cyan); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); display: block;">Instant Test Credentials:</span>
+        <span style="font-size: 0.82rem; color: var(--text-secondary); font-family: var(--font-mono);">test_user / test@careernova.ai</span>
+      </div>
+      <button type="button" id="btn-fill-register" class="btn btn-secondary btn-sm" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+        ⚡ Fill Sample Data
+      </button>
+    </div>
+
+    <form method="POST" action="/register" id="register-form" novalidate>
+      <input id="csrf_token" name="csrf_token" type="hidden" value="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input autocomplete="username" class="form-input" id="reg_username" maxlength="30" minlength="3" name="username" placeholder="e.g. alex_nova" required type="text" value="">
+        <span class="form-error" id="reg_username_error" style="display: none;"></span>
+        
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input autocomplete="email" class="form-input" id="reg_email" maxlength="120" name="email" placeholder="e.g. test@example.com (any valid format)" required type="text" value="">
+        <span class="form-error" id="reg_email_error" style="display: none;"></span>
+        
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="full_name">Full Name (Optional)</label>
+        <input class="form-input" id="reg_fullname" maxlength="100" name="full_name" placeholder="e.g. Alex Morgan" type="text" value="">
+        
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input autocomplete="new-password" class="form-input" id="reg_password" minlength="4" name="password" placeholder="Any password (min 4 chars)" required type="password" value="">
+          <span class="form-error" id="reg_password_error" style="display: none;"></span>
+          
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">Confirm Password</label>
+          <input autocomplete="new-password" class="form-input" id="reg_confirm" name="confirm_password" placeholder="Confirm password" required type="password" value="">
+          <span class="form-error" id="reg_confirm_error" style="display: none;"></span>
+          
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.25rem;">
+        Create Account & Go to Dashboard →
+      </button>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1.25rem; font-size: 0.8rem; color: var(--text-muted);">
+        <span>⚡ Zero Verification Required</span>
+        <span>🛡️ Instant Session Activation</span>
+        <span>🔒 Demo Safe</span>
+      </div>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); font-size: 0.9rem;">
+      <p>
+        Already have test credentials?
+        <a href="./login.html" class="text-cyan" style="font-weight: 600; text-decoration: none;">Sign in directly</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./index.html" class="brand">
+            <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+            <span>Career<span class="text-gradient">Nova</span> AI</span>
+          </a>
+          <p>
+            An AI career navigation platform designed to bridge technical skill gaps,
+            predict high-trajectory career outcomes, and deliver actionable learning roadmaps.
+          </p>
+          <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+            <span class="badge badge-cyan">
+              ● Rule-Based Intelligence
+            </span>
+            <span class="badge badge-purple">Vercel Ready</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="./assessment.html">Career Assessment</a></li>
+            <li><a href="./careers.html">Explore 18+ Careers</a></li>
+            <li><a href="./about.html">Our Methodology</a></li>
+            <li><a href="/api/health">System Health</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Career Paths</h5>
+          <ul>
+            <li><a href="./career-ai_ml_engineer.html">AI & ML Engineer</a></li>
+            <li><a href="./career-full_stack_dev.html">Full-Stack Developer</a></li>
+            <li><a href="./career-cloud_devops_architect.html">Cloud & DevOps</a></li>
+            <li><a href="./career-cybersecurity_engineer.html">Cybersecurity Specialist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            
+              <li><a href="./login.html">Sign In</a></li>
+              <li><a href="./register.html">Create Account</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CareerNova AI. Built for production deployment on Vercel.</p>
+        <p>Zero-compromise privacy: Secrets exclusively environment-driven.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Scripts -->
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/orbs.js"></script>
+  <script src="./static/js/charts.js"></script>
+  <script src="./static/js/dashboard.js"></script>
+
+  
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const regForm = document.getElementById('register-form');
+    const uInput = document.getElementById('reg_username');
+    const eInput = document.getElementById('reg_email');
+    const fInput = document.getElementById('reg_fullname');
+    const pInput = document.getElementById('reg_password');
+    const cInput = document.getElementById('reg_confirm');
+
+    const uError = document.getElementById('reg_username_error');
+    const eError = document.getElementById('reg_email_error');
+    const pError = document.getElementById('reg_password_error');
+    const cError = document.getElementById('reg_confirm_error');
+    const btnFill = document.getElementById('btn-fill-register');
+
+    if (btnFill && uInput && eInput && pInput && cInput) {
+      btnFill.addEventListener('click', () => {
+        const randId = Math.floor(Math.random() * 899) + 100;
+        uInput.value = `test_explorer_${randId}`;
+        eInput.value = `tester_${randId}@careernova.ai`;
+        if (fInput) fInput.value = 'Demo Explorer';
+        pInput.value = 'testpass123';
+        cInput.value = 'testpass123';
+
+        uError.style.display = 'none';
+        eError.style.display = 'none';
+        pError.style.display = 'none';
+        cError.style.display = 'none';
+      });
+    }
+
+    if (regForm && uInput && eInput && pInput && cInput) {
+      regForm.addEventListener('submit', (e) => {
+        let hasError = false;
+
+        uError.style.display = 'none';
+        eError.style.display = 'none';
+        pError.style.display = 'none';
+        cError.style.display = 'none';
+
+        const uVal = uInput.value.trim();
+        const eVal = eInput.value.trim();
+        const pVal = pInput.value;
+        const cVal = cInput.value;
+
+        if (!uVal) {
+          uError.textContent = 'Username is required.';
+          uError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (!eVal) {
+          eError.textContent = 'Email address is required.';
+          eError.style.display = 'block';
+          hasError = true;
+        } else {
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(eVal)) {
+            eError.textContent = 'Please enter a valid email format (e.g. demo@example.com).';
+            eError.style.display = 'block';
+            hasError = true;
+          }
+        }
+
+        if (!pVal) {
+          pError.textContent = 'Password cannot be empty.';
+          pError.style.display = 'block';
+          hasError = true;
+        } else if (pVal.length < 4) {
+          pError.textContent = 'Password must be at least 4 characters.';
+          pError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (pVal && cVal && pVal !== cVal) {
+          cError.textContent = 'Passwords do not match.';
+          cError.style.display = 'block';
+          hasError = true;
+        }
+
+        if (hasError) {
+          e.preventDefault();
+          return false;
+        }
+
+        if (window.DemoAuth) {
+          window.DemoAuth.setUser({
+            email: eVal,
+            username: uVal,
+            fullName: (fInput && fInput.value.trim()) ? fInput.value.trim() : uVal
+          });
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

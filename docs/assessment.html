@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareerNova AI - Next-generation AI career counseling, skill-gap analysis, and personalized learning roadmaps for modern tech careers.">
+  <meta name="theme-color" content="#060913">
+  <meta name="csrf-token" content="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+
+  <title>Career Assessment Wizard — CareerNova AI</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <!-- Typography: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Core & Animation Styles -->
+  <link rel="stylesheet" href="./static/css/animations.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+
+  
+</head>
+<body>
+  <!-- Ambient Gradient Background Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-blue"></div>
+  </div>
+
+  <!-- Interactive Particle Mesh Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Flash Alerts Notification Toast Container -->
+  <div class="alert-container" aria-live="polite">
+    
+      
+    
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="./index.html" class="brand">
+        <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+        <span>Career<span class="text-gradient">Nova</span> <span style="font-size: 0.75rem; font-weight: 700; background: rgba(139, 92, 246, 0.2); color: var(--accent-purple-light); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); border: 1px solid rgba(139, 92, 246, 0.4);">AI</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html" class="nav-link ">Home</a></li>
+        <li><a href="./careers.html" class="nav-link ">Career Library</a></li>
+        <li><a href="./assessment.html" class="nav-link active">Take Assessment</a></li>
+        <li><a href="./about.html" class="nav-link ">Methodology</a></li>
+        
+      </ul>
+
+      <!-- Auth Action Buttons -->
+      <div class="nav-auth">
+        
+          <a href="./login.html" class="btn btn-secondary btn-sm">Sign In</a>
+          <a href="./assessment.html" class="btn btn-primary btn-sm">Start Assessment</a>
+        
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content Block -->
+  <main>
+    
+<div class="container wizard-container">
+  <div style="text-align: center; margin-bottom: 2rem;" class="reveal">
+    <span class="badge badge-purple" style="margin-bottom: 0.6rem;">Precision Calibration</span>
+    <h2>Career Alignment Assessment</h2>
+    <p>Complete this 4-step diagnostic to calculate your technical compatibility across 18+ high-demand tech careers.</p>
+  </div>
+
+  <!-- Progress Tracker -->
+  <div class="wizard-progress-header reveal">
+    <div class="wizard-steps-nav">
+      <div class="wizard-step-node active" id="step-node-1">
+        <div class="step-circle">1</div>
+        <span class="step-label">Background</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-2">
+        <div class="step-circle">2</div>
+        <span class="step-label">Skills</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-3">
+        <div class="step-circle">3</div>
+        <span class="step-label">Interests</span>
+      </div>
+      <div class="wizard-step-node" id="step-node-4">
+        <div class="step-circle">4</div>
+        <span class="step-label">Goals & Review</span>
+      </div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="wizard-progress-fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <!-- Assessment Form -->
+  <div class="glass-card reveal" style="padding: 2.5rem;">
+    <form method="POST" action="/assessment" id="assessment-wizard-form">
+      <input id="csrf_token" name="csrf_token" type="hidden" value="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+      <input type="hidden" name="custom_skills" id="custom-skills-input" value="">
+      <input type="hidden" name="custom_interests" id="custom-interests-input" value="">
+
+      <!-- STEP 1: Background & Work Style -->
+      <div class="wizard-pane active" id="step-pane-1">
+        <div style="margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 1: Experience & Work Preferences</h3>
+          <p class="text-muted">Tell us about your current academic standing and ideal workplace dynamics.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="education_level">Highest Education Level</label>
+          <select class="form-select" id="education_level" name="education_level" required><option value="High School / Secondary">High School / Secondary Education</option><option value="Self-Taught / Bootcamp">Self-Taught / Coding Bootcamp Graduate</option><option value="Bachelor&#39;s Degree">Bachelor&#39;s Degree (CS, Engineering, or STEM)</option><option value="Bachelor&#39;s (Non-STEM)">Bachelor&#39;s Degree (Humanities / Business / Other)</option><option value="Master&#39;s / Postgraduate">Master&#39;s Degree (M.S., M.Tech, MBA)</option><option value="Doctorate / PhD">Doctorate / PhD / Academic Research</option></select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="experience_years">Current Professional Experience</label>
+          <select class="form-select" id="experience_years" name="experience_years" required><option value="0-1 years (Entry-Level)">0-1 years (Student, Beginner, or Career Switcher)</option><option value="1-3 years (Junior)">1-3 years (Junior Developer / Analyst)</option><option value="3-5 years (Mid-Level)">3-5 years (Mid-Level Practitioner)</option><option value="5+ years (Senior)">5+ years (Senior / Lead Professional)</option></select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="work_style">Preferred Work Style &amp; Environment</label>
+          <select class="form-select" id="work_style" name="work_style" required><option value="Remote / Hybrid">Remote / Hybrid (High autonomy &amp; flexibility)</option><option value="Collaborative &amp; Fast-paced">Collaborative &amp; Fast-paced (Cross-functional squads)</option><option value="Analytical &amp; Research-heavy">Analytical &amp; Research-heavy (Deep focus &amp; experimentation)</option><option value="High-Reliability &amp; Systems">High-Reliability &amp; Systems (Mission-critical operations)</option></select>
+        </div>
+      </div>
+
+      <!-- STEP 2: Technical Skills -->
+      <div class="wizard-pane" id="step-pane-2">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 2: Technical & Core Skills</h3>
+          <p class="text-muted">Select all skills you have used or are currently learning. Select at least 1 skill.</p>
+        </div>
+
+        <!-- Live Skill Filter -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <input type="text" id="skill-search-input" class="form-input" placeholder="🔍 Search skills (e.g. Python, Docker, React, SQL)...">
+        </div>
+
+        <!-- Predefined Skills Checkboxes -->
+        <div class="checkbox-chips-grid" id="skills-grid">
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-0" name="skills" type="checkbox" value="Python">
+              <span>Python</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-1" name="skills" type="checkbox" value="JavaScript / TypeScript">
+              <span>JavaScript / TypeScript</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-2" name="skills" type="checkbox" value="SQL">
+              <span>SQL</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-3" name="skills" type="checkbox" value="React">
+              <span>React</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-4" name="skills" type="checkbox" value="Node.js">
+              <span>Node.js</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-5" name="skills" type="checkbox" value="HTML5 &amp; CSS3">
+              <span>HTML5 &amp; CSS3</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-6" name="skills" type="checkbox" value="Machine Learning">
+              <span>Machine Learning</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-7" name="skills" type="checkbox" value="PyTorch">
+              <span>PyTorch</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-8" name="skills" type="checkbox" value="Docker">
+              <span>Docker</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-9" name="skills" type="checkbox" value="Kubernetes">
+              <span>Kubernetes</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-10" name="skills" type="checkbox" value="AWS / GCP / Azure">
+              <span>Cloud Platforms (AWS / GCP)</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-11" name="skills" type="checkbox" value="Linux / Bash">
+              <span>Linux / Bash</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-12" name="skills" type="checkbox" value="Figma">
+              <span>Figma / UI Design</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-13" name="skills" type="checkbox" value="Git">
+              <span>Git / Version Control</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-14" name="skills" type="checkbox" value="Ethical Hacking / Pen Testing">
+              <span>Cybersecurity &amp; Pen Testing</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-15" name="skills" type="checkbox" value="Network Security">
+              <span>Network Security</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-16" name="skills" type="checkbox" value="Data Visualization">
+              <span>Data Visualization (Tableau/Power BI)</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-17" name="skills" type="checkbox" value="Statistics &amp; Probability">
+              <span>Math &amp; Statistics</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-18" name="skills" type="checkbox" value="Product Roadmap Strategy">
+              <span>Product Strategy &amp; Roadmaps</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-19" name="skills" type="checkbox" value="Agile / Scrum Methodologies">
+              <span>Agile / Scrum</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-20" name="skills" type="checkbox" value="Solidity / Rust">
+              <span>Solidity / Web3</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-21" name="skills" type="checkbox" value="Flutter / React Native">
+              <span>Mobile App Development</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="skills-22" name="skills" type="checkbox" value="Apache Spark / PySpark">
+              <span>Big Data / PySpark</span>
+            </label>
+          
+        </div>
+
+        <!-- Custom Skill Adder -->
+        <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+          <label class="form-label" style="margin-bottom: 0.4rem;">Don't see a specific skill? Add it here:</label>
+          <div style="display: flex; gap: 0.75rem;">
+            <input type="text" id="custom-skill-text" class="form-input" placeholder="e.g. FastAPI, GraphQL, OpenCV, Rust">
+            <button type="button" id="btn-add-custom-skill" class="btn btn-secondary btn-sm">+ Add</button>
+          </div>
+          <div id="custom-skills-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;"></div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Passions & Domain Interests -->
+      <div class="wizard-pane" id="step-pane-3">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 3: What Energizes You?</h3>
+          <p class="text-muted">Select the technology domains and problem spaces you find most exciting.</p>
+        </div>
+
+        <div class="checkbox-chips-grid">
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-0" name="interests" type="checkbox" value="Artificial Intelligence">
+              <span>Artificial Intelligence &amp; LLMs</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-1" name="interests" type="checkbox" value="Web Development">
+              <span>Building Modern Web Applications</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-2" name="interests" type="checkbox" value="Cloud Infrastructure">
+              <span>Cloud Architecture &amp; DevOps</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-3" name="interests" type="checkbox" value="Cybersecurity">
+              <span>Cyber Defense &amp; Ethical Hacking</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-4" name="interests" type="checkbox" value="Data Analysis">
+              <span>Data Science &amp; Predictive Modeling</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-5" name="interests" type="checkbox" value="UI Design">
+              <span>User Interface &amp; Experience Design</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-6" name="interests" type="checkbox" value="Mobile Apps">
+              <span>Mobile Apps &amp; Smartphone Tech</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-7" name="interests" type="checkbox" value="Product Strategy">
+              <span>Product Leadership &amp; Strategy</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-8" name="interests" type="checkbox" value="Decentralization">
+              <span>Web3, Blockchain &amp; Crypto</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-9" name="interests" type="checkbox" value="System Reliability">
+              <span>Scalable Systems &amp; Uptime</span>
+            </label>
+          
+            <label class="chip-checkbox-label">
+              <input id="interests-10" name="interests" type="checkbox" value="Business Strategy">
+              <span>Business Intelligence &amp; Strategy</span>
+            </label>
+          
+        </div>
+      </div>
+
+      <!-- STEP 4: Goals & Review -->
+      <div class="wizard-pane" id="step-pane-4">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.4rem;">Step 4: Career Vision & Submission</h3>
+          <p class="text-muted">Optional: share your specific career goals to enrich your personalized AI action plan.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="career_goals">Career Vision &amp; Specific Goals</label>
+          <textarea class="form-textarea" id="career_goals" maxlength="800" name="career_goals" placeholder="e.g. I want to transition into an AI Engineer role within 9 months, build production LLM systems, and secure a high-growth remote position." rows="3">
+</textarea>
+        </div>
+
+        <!-- Review Summary Box -->
+        <div style="background: rgba(10, 16, 33, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
+          <h4 style="font-size: 1rem; color: var(--accent-cyan); margin-bottom: 1rem;">Profile Review Summary:</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+            <div>
+              <span class="text-muted">Education:</span>
+              <p class="text-white" id="review-education">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Experience Level:</span>
+              <p class="text-white" id="review-experience">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Skills Selected:</span>
+              <p class="text-white" id="review-skills-count">-</p>
+            </div>
+            <div>
+              <span class="text-muted">Interests Selected:</span>
+              <p class="text-white" id="review-interests-count">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation & Action Buttons -->
+      <div class="wizard-actions">
+        <button type="button" class="btn btn-secondary" id="btn-wizard-prev">← Previous</button>
+        <button type="button" class="btn btn-primary" id="btn-wizard-next">Next Step →</button>
+        <button type="submit" class="btn btn-primary btn-lg" id="btn-wizard-submit" style="display: none;">
+          Analyze Profile & Generate Roadmap 🚀
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./index.html" class="brand">
+            <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+            <span>Career<span class="text-gradient">Nova</span> AI</span>
+          </a>
+          <p>
+            An AI career navigation platform designed to bridge technical skill gaps,
+            predict high-trajectory career outcomes, and deliver actionable learning roadmaps.
+          </p>
+          <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+            <span class="badge badge-cyan">
+              ● Rule-Based Intelligence
+            </span>
+            <span class="badge badge-purple">Vercel Ready</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="./assessment.html">Career Assessment</a></li>
+            <li><a href="./careers.html">Explore 18+ Careers</a></li>
+            <li><a href="./about.html">Our Methodology</a></li>
+            <li><a href="/api/health">System Health</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Career Paths</h5>
+          <ul>
+            <li><a href="./career-ai_ml_engineer.html">AI & ML Engineer</a></li>
+            <li><a href="./career-full_stack_dev.html">Full-Stack Developer</a></li>
+            <li><a href="./career-cloud_devops_architect.html">Cloud & DevOps</a></li>
+            <li><a href="./career-cybersecurity_engineer.html">Cybersecurity Specialist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            
+              <li><a href="./login.html">Sign In</a></li>
+              <li><a href="./register.html">Create Account</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CareerNova AI. Built for production deployment on Vercel.</p>
+        <p>Zero-compromise privacy: Secrets exclusively environment-driven.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Scripts -->
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/orbs.js"></script>
+  <script src="./static/js/charts.js"></script>
+  <script src="./static/js/dashboard.js"></script>
+
+  
+<script src="./static/js/wizard.js"></script>
+
+</body>
+</html>

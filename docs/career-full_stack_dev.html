@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareerNova AI - Next-generation AI career counseling, skill-gap analysis, and personalized learning roadmaps for modern tech careers.">
+  <meta name="theme-color" content="#060913">
+  <meta name="csrf-token" content="ImI2MTA4MDg4MTkzMzgzN2VkNTFmODQ4NTMwM2EwNWQ3YTc1MTU0OTAi.atm2og.hdPQKA49JuN7XWycE90udklX9N0">
+
+  <title>Full-Stack Web Developer Roadmap & Career Profile — CareerNova AI</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <!-- Typography: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Core & Animation Styles -->
+  <link rel="stylesheet" href="./static/css/animations.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+
+  
+</head>
+<body>
+  <!-- Ambient Gradient Background Orbs -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-blue"></div>
+  </div>
+
+  <!-- Interactive Particle Mesh Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Flash Alerts Notification Toast Container -->
+  <div class="alert-container" aria-live="polite">
+    
+      
+    
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="./index.html" class="brand">
+        <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+        <span>Career<span class="text-gradient">Nova</span> <span style="font-size: 0.75rem; font-weight: 700; background: rgba(139, 92, 246, 0.2); color: var(--accent-purple-light); padding: 0.2rem 0.5rem; border-radius: var(--radius-full); border: 1px solid rgba(139, 92, 246, 0.4);">AI</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html" class="nav-link ">Home</a></li>
+        <li><a href="./careers.html" class="nav-link active">Career Library</a></li>
+        <li><a href="./assessment.html" class="nav-link ">Take Assessment</a></li>
+        <li><a href="./about.html" class="nav-link ">Methodology</a></li>
+        
+      </ul>
+
+      <!-- Auth Action Buttons -->
+      <div class="nav-auth">
+        
+          <a href="./login.html" class="btn btn-secondary btn-sm">Sign In</a>
+          <a href="./assessment.html" class="btn btn-primary btn-sm">Start Assessment</a>
+        
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content Block -->
+  <main>
+    
+<div class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <!-- Breadcrumb -->
+  <div style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+    <a href="./careers.html" style="color: var(--text-secondary); text-decoration: none;">Career Library</a>
+    <span style="margin: 0 0.5rem;">/</span>
+    <span style="color: var(--accent-cyan);">Full-Stack Web Developer</span>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="glass-card reveal" style="padding: 2.5rem; margin-bottom: 2.5rem; border-color: var(--border-glow);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+      <div style="max-width: 780px;">
+        <div style="display: flex; gap: 0.6rem; margin-bottom: 0.75rem;">
+          <span class="badge badge-cyan">Software Engineering</span>
+          <span class="badge badge-purple">High Demand</span>
+        </div>
+
+        <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 0.75rem;">
+          Full-Stack Web Developer
+        </h1>
+
+        <p style="font-size: 1.15rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.5rem;">
+          Full-Stack Developers create complete digital experiences. They architect databases, build secure server-side APIs, implement modern UI components, and deploy cloud-native software used by millions.
+        </p>
+
+        <!-- Compensation Tiers -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+          <div style="background: rgba(10, 16, 33, 0.6); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Entry Level (0-2 Yrs)</span>
+            <p style="font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-top: 0.2rem;">$82,000</p>
+          </div>
+          <div style="background: rgba(139, 92, 246, 0.1); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glow);">
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-purple-light); font-weight: 700;">Median Market</span>
+            <p style="font-size: 1.35rem; font-weight: 800; color: var(--accent-emerald); margin-top: 0.2rem;">$128,000</p>
+          </div>
+          <div style="background: rgba(10, 16, 33, 0.6); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Senior / Staff (5+ Yrs)</span>
+            <p style="font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-top: 0.2rem;">$185,000+</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Panel -->
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; min-width: 220px;">
+        <a href="./assessment.html" class="btn btn-primary btn-block">
+          Test My Fit for Role →
+        </a>
+
+        
+          <a href="/login?next=/careers/full_stack_dev" class="btn btn-secondary btn-block">
+            Sign In to Save Path
+          </a>
+        
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem; margin-top: 0.5rem; font-size: 0.82rem;">
+          <span style="color: var(--accent-cyan); font-weight: 700;">10-Year Growth Rate:</span>
+          <p style="color: var(--text-secondary); margin-top: 0.25rem;">+25% through 2032 (High growth)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Required Competencies Breakdown -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;" class="reveal">
+    <div class="glass-card">
+      <h3 style="margin-bottom: 1rem; color: var(--accent-cyan); font-size: 1.25rem;">Core Technical Competencies</h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+        Essential tools, languages, and frameworks required for technical interview screening.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        
+          <span class="skill-tag skill-tag-matched">JavaScript / TypeScript</span>
+        
+          <span class="skill-tag skill-tag-matched">Python</span>
+        
+          <span class="skill-tag skill-tag-matched">React</span>
+        
+          <span class="skill-tag skill-tag-matched">Node.js</span>
+        
+          <span class="skill-tag skill-tag-matched">HTML5 &amp; CSS3</span>
+        
+          <span class="skill-tag skill-tag-matched">SQL</span>
+        
+          <span class="skill-tag skill-tag-matched">Git</span>
+        
+      </div>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+        <h5 style="font-size: 0.9rem; color: var(--text-white); margin-bottom: 0.5rem;">Common Job Titles:</h5>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          
+            <span class="badge badge-purple" style="font-size: 0.78rem;">Full-Stack Software Engineer</span>
+          
+            <span class="badge badge-purple" style="font-size: 0.78rem;">Frontend Architect</span>
+          
+            <span class="badge badge-purple" style="font-size: 0.78rem;">Backend Systems Engineer</span>
+          
+            <span class="badge badge-purple" style="font-size: 0.78rem;">Technical Lead</span>
+          
+            <span class="badge badge-purple" style="font-size: 0.78rem;">Startup Founding Engineer</span>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h3 style="margin-bottom: 1rem; color: var(--accent-purple-light); font-size: 1.25rem;">Secondary & Infrastructure Skills</h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+        Supporting tools and operational practices that differentiate competitive senior candidates.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        
+          <span class="skill-tag skill-tag-gap">Next.js</span>
+        
+          <span class="skill-tag skill-tag-gap">Flask / FastAPI</span>
+        
+          <span class="skill-tag skill-tag-gap">PostgreSQL</span>
+        
+          <span class="skill-tag skill-tag-gap">Docker</span>
+        
+          <span class="skill-tag skill-tag-gap">REST &amp; GraphQL APIs</span>
+        
+          <span class="skill-tag skill-tag-gap">Tailwind CSS</span>
+        
+          <span class="skill-tag skill-tag-gap">Redis</span>
+        
+      </div>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+        <h5 style="font-size: 0.9rem; color: var(--text-white); margin-bottom: 0.5rem;">Essential Soft Skills:</h5>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          
+            <span class="badge badge-cyan" style="font-size: 0.78rem;">Product Sense</span>
+          
+            <span class="badge badge-cyan" style="font-size: 0.78rem;">Cross-team Communication</span>
+          
+            <span class="badge badge-cyan" style="font-size: 0.78rem;">Debugging Tenacity</span>
+          
+            <span class="badge badge-cyan" style="font-size: 0.78rem;">Attention to Detail</span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complete 4-Phase Step-by-Step Learning Roadmap -->
+  <div class="glass-card reveal" style="margin-bottom: 3rem;">
+    <div style="margin-bottom: 2rem;">
+      <span class="badge badge-purple" style="margin-bottom: 0.5rem;">Chronological Learning Curriculum</span>
+      <h2>4-Phase Professional Roadmap</h2>
+      <p class="text-muted">Structured learning pathway from initial concepts to production engineering mastery.</p>
+    </div>
+
+    <div class="roadmap-timeline">
+      
+        <div class="timeline-phase">
+          <div class="timeline-node">1</div>
+          <div class="phase-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 1.15rem; color: var(--text-white);">Phase 1: Web Fundamentals</h4>
+              <span class="badge badge-cyan">Months 1-2</span>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Key Topics & Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem;">
+                
+                  <span class="skill-tag">HTML5 Semantic Markup</span>
+                
+                  <span class="skill-tag">Modern CSS &amp; Flexbox/Grid</span>
+                
+                  <span class="skill-tag">Modern JavaScript (ES6+)</span>
+                
+                  <span class="skill-tag">Git &amp; GitHub</span>
+                
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--accent-purple); padding: 0.75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-purple-light);">Hands-on Milestone Project: </span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Build an interactive responsive dashboard with vanilla JS and glassmorphism styling.</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="timeline-phase">
+          <div class="timeline-node">2</div>
+          <div class="phase-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 1.15rem; color: var(--text-white);">Phase 2: Modern Frontend &amp; State</h4>
+              <span class="badge badge-cyan">Months 3-4</span>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Key Topics & Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem;">
+                
+                  <span class="skill-tag">React / Next.js</span>
+                
+                  <span class="skill-tag">TypeScript</span>
+                
+                  <span class="skill-tag">Tailwind CSS</span>
+                
+                  <span class="skill-tag">Client State Management</span>
+                
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--accent-purple); padding: 0.75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-purple-light);">Hands-on Milestone Project: </span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Create a rich collaborative Kanban task management application.</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="timeline-phase">
+          <div class="timeline-node">3</div>
+          <div class="phase-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 1.15rem; color: var(--text-white);">Phase 3: Robust Backend &amp; Databases</h4>
+              <span class="badge badge-cyan">Months 5-6</span>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Key Topics & Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem;">
+                
+                  <span class="skill-tag">Node.js or Python (Flask/FastAPI)</span>
+                
+                  <span class="skill-tag">PostgreSQL</span>
+                
+                  <span class="skill-tag">ORM &amp; Schema Migrations</span>
+                
+                  <span class="skill-tag">JWT &amp; Auth</span>
+                
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--accent-purple); padding: 0.75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-purple-light);">Hands-on Milestone Project: </span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Build a secure multi-tenant SaaS REST API with payment gateway webhook integration.</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="timeline-phase">
+          <div class="timeline-node">4</div>
+          <div class="phase-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h4 style="font-size: 1.15rem; color: var(--text-white);">Phase 4: Production &amp; DevOps</h4>
+              <span class="badge badge-cyan">Months 7-8</span>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Key Topics & Skills:</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem;">
+                
+                  <span class="skill-tag">Docker</span>
+                
+                  <span class="skill-tag">Vercel / AWS</span>
+                
+                  <span class="skill-tag">Redis Caching</span>
+                
+                  <span class="skill-tag">CI/CD Actions</span>
+                
+                  <span class="skill-tag">Web Security &amp; OWASP</span>
+                
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--accent-purple); padding: 0.75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-purple-light);">Hands-on Milestone Project: </span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Deploy and load-test a production-ready SaaS application with automated tests.</span>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+
+  <!-- Curated Learning Resources Grid -->
+  <div class="glass-card reveal" style="margin-bottom: 3rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <span class="badge badge-emerald" style="margin-bottom: 0.5rem;">Verified Material</span>
+      <h3>Curated Free & Paid Learning Resources</h3>
+      <p class="text-muted">Accelerate your progress with the most respected tutorials, courses, and documentation.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+      
+        <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="badge badge-cyan">Interactive Curriculum</span>
+              
+                <span class="badge badge-emerald">Free</span>
+              
+            </div>
+            <h5 style="color: var(--text-white); font-size: 1rem; margin-bottom: 0.5rem;">The Odin Project - Full Stack Curriculum</h5>
+          </div>
+          <a href="https://www.theodinproject.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan btn-sm" style="margin-top: 1rem;">
+            Access Resource ↗
+          </a>
+        </div>
+      
+        <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="badge badge-cyan">Course</span>
+              
+                <span class="badge badge-emerald">Free</span>
+              
+            </div>
+            <h5 style="color: var(--text-white); font-size: 1rem; margin-bottom: 0.5rem;">Full Stack Open (University of Helsinki)</h5>
+          </div>
+          <a href="https://fullstackopen.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan btn-sm" style="margin-top: 1rem;">
+            Access Resource ↗
+          </a>
+        </div>
+      
+        <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="badge badge-cyan">Official Reference</span>
+              
+                <span class="badge badge-emerald">Free</span>
+              
+            </div>
+            <h5 style="color: var(--text-white); font-size: 1rem; margin-bottom: 0.5rem;">MDN Web Docs</h5>
+          </div>
+          <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan btn-sm" style="margin-top: 1rem;">
+            Access Resource ↗
+          </a>
+        </div>
+      
+        <div style="background: rgba(10, 16, 33, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="badge badge-cyan">Video Series</span>
+              
+                <span class="badge badge-amber">Paid / Cert</span>
+              
+            </div>
+            <h5 style="color: var(--text-white); font-size: 1rem; margin-bottom: 0.5rem;">Frontend Masters: Complete Intro to Web Dev</h5>
+          </div>
+          <a href="https://frontendmasters.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-cyan btn-sm" style="margin-top: 1rem;">
+            Access Resource ↗
+          </a>
+        </div>
+      
+    </div>
+  </div>
+
+  <!-- Related Careers -->
+  
+    <div class="reveal">
+      <h3 style="margin-bottom: 1.5rem;">Related Career Pathways</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 0.5rem;">Artificial Intelligence &amp; Data</span>
+              <h4>AI &amp; Machine Learning Engineer</h4>
+              <p style="font-size: 0.88rem; margin: 0.5rem 0 1rem; color: var(--text-secondary);">Architect intelligent neural networks, foundation models, and scalable AI systems.</p>
+            </div>
+            <a href="./career-ai_ml_engineer.html" class="btn btn-secondary btn-sm btn-block">
+              Explore Path →
+            </a>
+          </div>
+        
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 0.5rem;">Cloud &amp; Infrastructure</span>
+              <h4>Cloud &amp; DevOps Architect</h4>
+              <p style="font-size: 0.88rem; margin: 0.5rem 0 1rem; color: var(--text-secondary);">Automate infrastructure, scale resilient Kubernetes clusters, and power CI/CD delivery.</p>
+            </div>
+            <a href="./career-cloud_devops_architect.html" class="btn btn-secondary btn-sm btn-block">
+              Explore Path →
+            </a>
+          </div>
+        
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 0.5rem;">Security &amp; Defense</span>
+              <h4>Cybersecurity Specialist &amp; Ethical Hacker</h4>
+              <p style="font-size: 0.88rem; margin: 0.5rem 0 1rem; color: var(--text-secondary);">Protect digital ecosystems, identify critical vulnerabilities, and neutralize cyber threats.</p>
+            </div>
+            <a href="./career-cybersecurity_engineer.html" class="btn btn-secondary btn-sm btn-block">
+              Explore Path →
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  
+</div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./index.html" class="brand">
+            <img src="./static/images/favicon.svg" alt="Nova Logo" class="brand-icon">
+            <span>Career<span class="text-gradient">Nova</span> AI</span>
+          </a>
+          <p>
+            An AI career navigation platform designed to bridge technical skill gaps,
+            predict high-trajectory career outcomes, and deliver actionable learning roadmaps.
+          </p>
+          <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+            <span class="badge badge-cyan">
+              ● Rule-Based Intelligence
+            </span>
+            <span class="badge badge-purple">Vercel Ready</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="./assessment.html">Career Assessment</a></li>
+            <li><a href="./careers.html">Explore 18+ Careers</a></li>
+            <li><a href="./about.html">Our Methodology</a></li>
+            <li><a href="/api/health">System Health</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Career Paths</h5>
+          <ul>
+            <li><a href="./career-ai_ml_engineer.html">AI & ML Engineer</a></li>
+            <li><a href="./career-full_stack_dev.html">Full-Stack Developer</a></li>
+            <li><a href="./career-cloud_devops_architect.html">Cloud & DevOps</a></li>
+            <li><a href="./career-cybersecurity_engineer.html">Cybersecurity Specialist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            
+              <li><a href="./login.html">Sign In</a></li>
+              <li><a href="./register.html">Create Account</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CareerNova AI. Built for production deployment on Vercel.</p>
+        <p>Zero-compromise privacy: Secrets exclusively environment-driven.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Scripts -->
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/orbs.js"></script>
+  <script src="./static/js/charts.js"></script>
+  <script src="./static/js/dashboard.js"></script>
+
+  
+</body>
+</html>
