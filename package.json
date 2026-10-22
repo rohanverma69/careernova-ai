@@ -1,0 +1,14 @@
+{
+  "name": "careernova-ai",
+  "version": "1.0.0",
+  "description": "CareerNova AI - AI Career Guidance Platform with Neon PostgreSQL",
+  "scripts": {
+    "build": "node -e \"const { execSync } = require('child_process'), fs = require('fs'); const py = fs.existsSync('.venv/Scripts/python.exe') ? '.venv\\\\Scripts\\\\python.exe' : (fs.existsSync('.venv/bin/python') ? '.venv/bin/python' : 'python'); execSync(py + ' init_db.py', { stdio: 'inherit' });\"",
+    "test": "node -e \"const { execSync } = require('child_process'), fs = require('fs'); const py = fs.existsSync('.venv/Scripts/pytest.exe') ? '.venv\\\\Scripts\\\\pytest.exe' : (fs.existsSync('.venv/bin/pytest') ? '.venv/bin/pytest' : 'pytest'); execSync(py + ' -v', { stdio: 'inherit' });\"",
+    "start": "node -e \"const { execSync } = require('child_process'), fs = require('fs'); const py = fs.existsSync('.venv/Scripts/python.exe') ? '.venv\\\\Scripts\\\\python.exe' : (fs.existsSync('.venv/bin/python') ? '.venv/bin/python' : 'python'); execSync(py + ' app.py', { stdio: 'inherit' });\""
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.3",
+    "@neon/env": "^1.6.4"
+  }
+}

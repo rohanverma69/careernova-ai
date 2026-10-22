@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file if present
-load_dotenv()
+# Load environment variables from .env.local (Neon CLI deploy) and .env
+load_dotenv(dotenv_path=".env.local", override=True)
+load_dotenv(dotenv_path=".env")
 
 
 class Config:
@@ -24,9 +25,11 @@ class Config:
     raw_db_url = os.environ.get("DATABASE_URL", "").strip()
 
     if raw_db_url:
-        # Normalize postgres:// to postgresql:// for SQLAlchemy 2.0+ compatibility
+        # Normalize postgres:// or postgresql:// to postgresql+psycopg2:// for SQLAlchemy
         if raw_db_url.startswith("postgres://"):
-            raw_db_url = raw_db_url.replace("postgres://", "postgresql://", 1)
+            raw_db_url = raw_db_url.replace("postgres://", "postgresql+psycopg2://", 1)
+        elif raw_db_url.startswith("postgresql://") and not raw_db_url.startswith("postgresql+"):
+            raw_db_url = raw_db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
         SQLALCHEMY_DATABASE_URI = raw_db_url
         
         # PostgreSQL Engine options optimized for serverless execution
