@@ -4,11 +4,11 @@
 > Optimized natively for serverless deployment on **Vercel** with **Python 3.12+**, **Flask**, **SQLAlchemy**, and managed **PostgreSQL**.
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-brightgreen?style=for-the-badge&logo=github)](https://rohanverma69.github.io/careernova-ai/)
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-Full%20Stack%20Live-black?style=for-the-badge&logo=vercel)](https://careernova-ai.vercel.app)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Full%20Stack%20Live-black?style=for-the-badge&logo=vercel)](https://careernova-ai-snxc.vercel.app/)
 
 ### 🌐 Live Links
+- **Vercel Full-Stack (Python + Neon PostgreSQL)**: [https://careernova-ai-snxc.vercel.app/](https://careernova-ai-snxc.vercel.app/)
 - **GitHub Pages (Direct Browser App)**: [https://rohanverma69.github.io/careernova-ai/](https://rohanverma69.github.io/careernova-ai/)
-- **Vercel (Full-Stack Python + PostgreSQL)**: [https://careernova-ai.vercel.app](https://careernova-ai.vercel.app)
 
 ---
 
