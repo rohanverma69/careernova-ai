@@ -12,13 +12,16 @@ from config import Config
 from extensions import db, login_manager, csrf
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def create_app(config_class=Config) -> Flask:
     """Application factory for CareerNova AI."""
     app = Flask(
         __name__,
-        static_folder="static",
+        static_folder=os.path.join(BASE_DIR, "static"),
         static_url_path="/static",
-        template_folder="templates"
+        template_folder=os.path.join(BASE_DIR, "templates")
     )
 
     # Load configuration
